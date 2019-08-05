@@ -4,5 +4,5 @@
 # create by thomas on 2019/5/28.
 from flask import Blueprint
 
-admin = Blueprint('admin', __name__, url_prefix='/petal')
+admin = Blueprint('admin', __name__, url_prefix='/admin')
 from .dashboard import *

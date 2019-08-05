@@ -1,0 +1,91 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="Bookmark" href="favicon.ico">
+    <link rel="Shortcut Icon" href="favicon.ico"/>
+    <!--[if lt IE 9]>
+	<script type="text/javascript" src="lib/html5.js"></script>
+	<script type="text/javascript" src="lib/respond.min.js"></script>
+	<![endif]-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for("static",filename="admin/h-ui/css/H-ui.min.css") }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for("static",filename="admin/h-ui.admin.pro/css/h-ui.admin.pro.min.css") }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for("static",filename="admin/libs/Hui-iconfont/1.0.9/iconfont.css") }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for("static",filename="admin/h-ui.admin.pro/skin/default/skin.css") }}" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for("static",filename="admin/business/css/style.css") }}"/>
+    <!--[if IE 6]>
+	<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+	<script>DD_belatedPNG.fix('*');</script><![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+    <title>{% block title %} {% endblock %}- Wones 博客</title>
+    {% block seo %}
+        <meta name="keywords" content="blog">
+        <meta name="description" content="base">
+    {% endblock %}
+</head>
+<body>
+<!--_menu 作为公共模版分离出去-->
+{% block aside %}
+    {% include "admin/base/aside.html" %}
+{% endblock %}
+<div class="Hui-admin-aside-mask"></div>
+<!--/_menu 作为公共模版分离出去-->
+<div class="Hui-admin-dislpayArrow">
+    <a href="javascript:void(0);" onClick="displaynavbar(this)">
+        <i class="Hui-iconfont Hui-iconfont-left">&#xe6d4;</i>
+        <i class="Hui-iconfont Hui-iconfont-right">&#xe6d7;</i>
+    </a>
+</div>
+<section class="Hui-admin-article-wrapper">
+    <!--_header 作为公共模版分离出去-->
+    {% block header %}{% include "admin/base/header.html" %}{% endblock %}
+    <!--/_header 作为公共模版分离出去-->
+    <div class="Hui-admin-article">
+        {% block navbar %}
+            <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px">
+                首页
+                <span class="c-gray en">/</span>
+                空白页面
+            </nav>
+        {% endblock %}
+        <article class="Hui-admin-content clearfix" style="min-height: 680px">
+            <div class="panel">
+                <div class="panel-body">
+                    {% block panel %}空白页面{% endblock %}
+                </div>
+            </div>
+        </article>
+        <footer class="footer Hui-admin-content Hui-admin-footer" style="background: #2f332a;color: aliceblue;">
+            <p>
+                感谢jQuery、layer、laypage、Validform、UEditor、iconfont、Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch<br>
+                Copyright &copy;2015 h-ui.admin.pro v1.0 All Rights Reserved.<br> 本后台系统由<a href="http://www.h-ui.net/"
+                                                                                           target="_blank"
+                                                                                           title="H-ui前端框架">H-ui前端框架</a>提供前端技术支持
+            </p>
+        </footer>
+    </div>
+</section>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="{{ url_for('static',filename="admin/libs/jquery/1.9.1/jquery.min.js") }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename="admin/libs/layer/3.1.1/layer.js") }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename="admin/h-ui/js/H-ui.min.js") }}"></script>
+<script type="text/javascript"
+        src="{{ url_for('static',filename="admin/h-ui.admin.pro/js/h-ui.admin.pro.min.js") }}"></script>
+<!--/_footer /作为公共模版分离出去-->
+{% block javascript %}
+    <!--请在下方写此页面业务相关的脚本-->
+    <script type="text/javascript" src="{{ url_for('static',filename="admin/libs/laypage/1.2/laypage.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename="admin/business/js/main.js") }}"></script>
+{% endblock %}
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

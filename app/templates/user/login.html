@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+<![endif]-->
+    <link href="{{ url_for('static',filename="admin/h-ui/css/H-ui.css") }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url_for('static',filename="admin/h-ui.ucenter/css/H-ui.ucenter.css") }}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ url_for('static',filename="admin/libs/Hui-iconfont/1.0.9/iconfont.css") }}" rel="stylesheet"
+          type="text/css"/>
+    <!--[if lt IE 9]>
+<link href="{{ url_for('static',filename="admin/h-ui/css/H-ui.ie.css") }}" rel="stylesheet" type="text/css" />
+<![endif]-->
+    <!--[if IE 6]>
+<script type="text/javascript" src="{{ url_for('static',filename="admin/libs/DD_belatedPNG_0.0.8a-min.js") }}" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+    <title>用户登陆-后台管理系统</title>
+    <meta name="keywords" content="flask">
+    <meta name="description" content="H-ui出品正版企业网站模版H-ui.qiye，使用H-ui前端框架，采用响应式设计，兼容PC、平板（pad）、移动端（手机）三大平台！">
+</head>
+<body>
+<div class="login-wraper">
+    <div class="login-form radius box-shadow">
+        <div class="clearfix pt-20">
+            <i class="iconpic iconpic-logo"></i>
+        </div>
+        <div class="row clearfix form-title">网站登录</div>
+        <form class="form form-horizontal" id="form-login">
+            <div class="row clearfix">
+                {{ form.email }}
+            </div>
+            <div class="row clearfix">
+                {{ form.password }}
+            </div>
+            <div class="row clearfix">
+                <button type="button" class="button btn btn-primary btn-block radius size-L">登 录</button>
+            </div>
+            <div class="row clearfix f-12">
+                <a href="/password/reset/">忘记密码?</a>
+                <div class="line mt-20"></div>
+            </div>
+
+            <div class="row clearfix">没有账户? <a href="reg"><strong>注 册</strong></a></div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="{{ url_for('static',filename="admin/libs/jquery/1.9.1/jquery.min.js") }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename="admin/h-ui/js/H-ui.js") }}"></script>
+{#<script type="text/javascript"#}
+{#        src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/jquery.validate.js") }}"></script>#}
+{#<script type="text/javascript"#}
+{#        src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/validate-methods.js") }}"></script>#}
+{#<script type="text/javascript"#}
+{#        src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/messages_zh.js") }}"></script>#}
+<script type="text/javascript">
+    $(function () {
+
+    });
+    $('.button').click(function () {
+        var postData = {}
+        var data = $("form").serializeArray();
+        $.each(data, function () {
+            postData[this.name] = this.value
+        })
+        $.ajax(
+            url:"",
+            type:"post",
+            data:postData,
+            'success':function (result) {
+        }
+    );
+    });
+</script>
+</body>
+</html>
