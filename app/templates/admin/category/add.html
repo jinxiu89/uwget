@@ -8,9 +8,6 @@
             <div class="form-controls col-xs-8 col-sm-2">
 					<span class="select-box">
                         {{ form.pid }}
-{#					<select name="pid" class="select" size="1" style="height: 30px;">#}
-{#						<option value="0">一级分类</option>#}
-{#					</select>#}
 					</span>
             </div>
         </div>
@@ -29,6 +26,7 @@
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>状态：</label>
             <div class="form-controls col-xs-8 col-sm-9 skin-minimal">
+{#                {{ form.status }}#}
                 <div class="radio-box">
                     <input name="status" type="radio" id="status-1" checked>
                     <label for="status-1">正常</label>
@@ -62,12 +60,11 @@
             src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/messages_zh.js") }}"></script>
     <script type="text/javascript">
         $(function () {
-            /* 通过iCheck插件，美化checkbox */
             $('.skin-minimal input').iCheck({
-                checkboxClass: 'icheckbox-blue',
-                radioClass: 'iradio-blue',
-                increaseArea: '20%'
-            });
+				checkboxClass: 'icheckbox-blue',
+				radioClass: 'iradio-blue',
+				increaseArea: '20%'
+			});
             $(".description-textarea").Huitextarealength({
                minlength: 10,
                maxlength:255
