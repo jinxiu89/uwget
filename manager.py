@@ -8,6 +8,7 @@ from app import create_app
 from app.modules.Base import db
 from app.modules.UserAuths import UserAuth
 from app.modules.UserBase import UserBase
+from app.modules.Category import Category
 
 app = create_app('default')
 migrate = Migrate(app, db)

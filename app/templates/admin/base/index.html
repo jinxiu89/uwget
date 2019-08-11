@@ -11,8 +11,8 @@
     <link rel="Bookmark" href="favicon.ico">
     <link rel="Shortcut Icon" href="favicon.ico"/>
     <!--[if lt IE 9]>
-	<script type="text/javascript" src="lib/html5.js"></script>
-	<script type="text/javascript" src="lib/respond.min.js"></script>
+	<script type="text/javascript" src="{{ url_for('static',filename='admin/libs/html5shiv.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static',filename='admin/libs/respond.min.js') }}"></script>
 	<![endif]-->
     <link rel="stylesheet" type="text/css" href="{{ url_for("static",filename="admin/h-ui/css/H-ui.min.css") }}"/>
     <link rel="stylesheet" type="text/css"
@@ -57,21 +57,9 @@
                 空白页面
             </nav>
         {% endblock %}
-        <article class="Hui-admin-content clearfix" style="min-height: 680px">
-            <div class="panel">
-                <div class="panel-body">
-                    {% block panel %}空白页面{% endblock %}
-                </div>
-            </div>
-        </article>
-        <footer class="footer Hui-admin-content Hui-admin-footer" style="background: #2f332a;color: aliceblue;">
-            <p>
-                感谢jQuery、layer、laypage、Validform、UEditor、iconfont、Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch<br>
-                Copyright &copy;2015 h-ui.admin.pro v1.0 All Rights Reserved.<br> 本后台系统由<a href="http://www.h-ui.net/"
-                                                                                           target="_blank"
-                                                                                           title="H-ui前端框架">H-ui前端框架</a>提供前端技术支持
-            </p>
-        </footer>
+    {% block main %}
+{#        此处是功能区主要放置区域#}
+    {% endblock %}
     </div>
 </section>
 <!--_footer 作为公共模版分离出去-->

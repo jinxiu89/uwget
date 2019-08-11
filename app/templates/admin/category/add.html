@@ -1,0 +1,120 @@
+{% extends "admin/base/form.html" %}
+{% block form %}
+    <form action="" method="post" class="form form-horizontal" id="form-admin-add">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2">
+                <span class="c-red">*</span>父分类：
+            </label>
+            <div class="form-controls col-xs-8 col-sm-2">
+					<span class="select-box">
+                        {{ form.pid }}
+{#					<select name="pid" class="select" size="1" style="height: 30px;">#}
+{#						<option value="0">一级分类</option>#}
+{#					</select>#}
+					</span>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2" id="name"><span class="c-red">*</span>分类名称：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                {{ form.name }}
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2" id="keywords"><span class="c-red">*</span>关键词：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                {{ form.keywords }}
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>状态：</label>
+            <div class="form-controls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="status" type="radio" id="status-1" checked>
+                    <label for="status-1">正常</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="status-2" name="status">
+                    <label for="status-2">关闭</label>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2">描述：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                {{ form.description }}
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {{ form.submit }}
+{#                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">#}
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript"
+            src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/jquery.validate.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/validate-methods.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/messages_zh.js") }}"></script>
+    <script type="text/javascript">
+        $(function () {
+            /* 通过iCheck插件，美化checkbox */
+            $('.skin-minimal input').iCheck({
+                checkboxClass: 'icheckbox-blue',
+                radioClass: 'iradio-blue',
+                increaseArea: '20%'
+            });
+            $(".description-textarea").Huitextarealength({
+               minlength: 10,
+               maxlength:255
+            });
+            /* 表单验证，提交 */
+            $("#form-admin-add").validate({
+                rules: {
+                    adminName: {
+                        required: true,
+                        minlength: 4,
+                        maxlength: 16
+                    },
+                    password: {
+                        required: true,
+                    },
+                    password2: {
+                        required: true,
+                        equalTo: "#password"
+                    },
+                    sex: {
+                        required: true,
+                    },
+                    phone: {
+                        required: true,
+                        isPhone: true,
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                    },
+                    adminRole: {
+                        required: true,
+                    },
+                    remarks: {
+                        maxlength: 100,
+                    }
+                },
+                onkeyup: false,
+                focusCleanup: true,
+                success: "valid",
+                submitHandler: function (form) {
+                    $(form).ajaxSubmit();
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.location.replace(parent.location.href)
+                    parent.layer.close(index);
+                }
+            });
+        });
+    </script>
+{% endblock %}

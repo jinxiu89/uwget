@@ -7,10 +7,11 @@ from .Base import db
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    pid = db.Column(db.Integer)
     name = db.Column(db.String(64), comment="分类名称")
     title = db.Column(db.String(64), comment="url标识")
     keywords = db.Column(db.String(128), comment="分类关键词")
-    list_order = db.Column(db.Integer, comment="列表排序")
+    sort = db.Column(db.Integer, comment="列表排序")
     status = db.Column(db.SmallInteger, comment="状态")
     description = db.Column(db.String(255), comment="分类描述")
 
