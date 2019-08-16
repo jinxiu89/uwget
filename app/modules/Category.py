@@ -24,16 +24,46 @@ class Category(db.Model):
 
     @classmethod
     def all(cls):
-        query = cls.query
+        """
+
+        :return:
+        """
+        query = db.session.query(cls)
+        data = query.all()
+        count = query.count()
+        return data, count
+
+    @classmethod
+    def by_id(cls, id):
+        """
+        根据ID 查询单条数据
+        :param id:
+        :return:
+        """
+        return db.session.query(cls).filter_by(id=id).first()
+
+    @classmethod
+    def by_uuid(cls, name):
+        """
+        根据name查询
+        :param name:
+        :return:
+        """
+        return db.session.query(cls).filter_by(name=name).first()
 
     @classmethod
     def create(cls, data):
+        """
+        当验证过后，就开始保存
+        :param data:
+        :return:
+        """
         result = Category(
             pid=data['pid'],
             name=data['name'],
             title=uuid.uuid4().hex,
             keywords=data['keywords'],
-            sort=100,
+            sort=data['sort'],
             status=data['status'],
             description=data['description'],
             create_time=int(time.time())
@@ -48,4 +78,22 @@ class Category(db.Model):
 
     @classmethod
     def edit(cls, data):
-        pass
+        """
+
+        :param data:
+        :return:
+        """
+        try:
+            category = cls.by_id(data['id'])
+            category.name = data['name']
+            category.pid = data['pid']
+            category.keywords = data['keywords']
+            category.sort = data['sort']
+            category.status = data['status']
+            category.description = data['description']
+            db.session.add(category)
+            db.session.commit()
+            return {'status': True, 'message': "保存成功"}
+        except Exception as e:
+            db.session.rollback()
+            return {'status': False, 'message': str(e)}

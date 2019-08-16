@@ -3,7 +3,7 @@
 # author:jinxiu89@163.com
 # create by thomas on 2019/8/11.
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, RadioField, TextAreaField, SelectField
+from wtforms import StringField, SubmitField, RadioField, TextAreaField, SelectField, IntegerField
 from wtforms.validators import DataRequired, length
 
 
@@ -28,6 +28,8 @@ class addForm(FlaskForm):
                                 render_kw={"id": "description", "class": "textarea description-textarea",
                                            "cols": "", "rows": "",
                                            "placeholder": "描述是seo的关键信息，请想好后添加，也可以先填一个，后期再修改"})
+    sort = IntegerField(label='排序', validators=[DataRequired("排序必须填写")], description="排序",
+                        render_kw={"id": "sort", "class": "input-text size-L", "placeholder": 100})
 
     def __init__(self, *args, **kwargs):
         super(addForm, self).__init__(*args, **kwargs)
