@@ -3,6 +3,8 @@
 # author:jinxiu89@163.com
 # create by thomas on 2019/8/5.
 from .Base import db
+import time
+import uuid
 
 
 class Category(db.Model):
@@ -20,8 +22,30 @@ class Category(db.Model):
         data = {"name": self.name, "title": self.title}
         return '{}'.format(data)
 
-    def create(data):
+    @classmethod
+    def all(cls):
+        query = cls.query
+
+    @classmethod
+    def create(cls, data):
         result = Category(
-            pid=data.pid,
-                 // 写道分类添加的地方了
+            pid=data['pid'],
+            name=data['name'],
+            title=uuid.uuid4().hex,
+            keywords=data['keywords'],
+            sort=100,
+            status=data['status'],
+            description=data['description'],
+            create_time=int(time.time())
         )
+        try:
+            db.session.add(result)
+            db.session.commit()
+            return {'status': True, 'message': "创建成功"}
+        except Exception as e:
+            db.session.rollback()
+            return {'status': False, 'message': str(e)}
+
+    @classmethod
+    def edit(cls, data):
+        pass

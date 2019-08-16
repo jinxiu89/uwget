@@ -64,9 +64,6 @@
 {#<script type="text/javascript"#}
 {#        src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/messages_zh.js") }}"></script>#}
 <script type="text/javascript">
-    $(function () {
-
-    });
     $('.button').click(function () {
         var postData = {}
         var data = $("form").serializeArray();
@@ -78,8 +75,7 @@
             type:"post",
             data:postData,
             'success':function (result) {
-        }
-    );
+        });
     });
 </script>
 </body>

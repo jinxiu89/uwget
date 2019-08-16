@@ -5,7 +5,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, RadioField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, length
-from app.modules.Category import Category
 
 
 class addForm(FlaskForm):
@@ -33,8 +32,4 @@ class addForm(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(addForm, self).__init__(*args, **kwargs)
 
-    submit = SubmitField(render_kw={"class": "btn btn-primary radius size-L", "value": "提交"})
-
-    def create(self):
-        Category.create(self)
-
+    submit = SubmitField(render_kw={"class": "button btn btn-primary radius size-L", 'type': 'button', "value": "提交"})
