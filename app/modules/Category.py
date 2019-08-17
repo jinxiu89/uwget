@@ -34,6 +34,12 @@ class Category(db.Model):
         return data, count
 
     @classmethod
+    def choices(cls):
+        category = [(i.id, i.name) for i in cls.query.all()]
+        category.insert(0, (1, "根分类"))
+        return category
+
+    @classmethod
     def by_id(cls, id):
         """
         根据ID 查询单条数据

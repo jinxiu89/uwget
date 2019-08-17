@@ -18,7 +18,7 @@
                     class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
             <dd class="Hui-menu-item">
                 <ul>
-                    <li class="post-category"><a href="category" title="分类管理">分类管理</a></li>
+                    <li class="post-category"><a href="{{ url_for('admin.category_list') }}" title="分类管理">分类管理</a></li>
                     <li><a href="article-list.html" title="POST管理">POST管理</a></li>
                     <li><a onclick="article_add('添加资讯','article-add.html')" href="javascript:;" title="新增资讯">新增资讯</a>
                     </li>

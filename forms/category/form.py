@@ -7,7 +7,7 @@ from wtforms import StringField, SubmitField, RadioField, TextAreaField, SelectF
 from wtforms.validators import DataRequired, length
 
 
-class addForm(FlaskForm):
+class Form(FlaskForm):
     pid = SelectField(label="根分类", coerce=int, validators=[DataRequired('请选择父分类')], render_kw={
         "class": "select valid",
         "size": 1,
@@ -32,6 +32,6 @@ class addForm(FlaskForm):
                         render_kw={"id": "sort", "class": "input-text size-L", "placeholder": 100})
 
     def __init__(self, *args, **kwargs):
-        super(addForm, self).__init__(*args, **kwargs)
+        super(Form, self).__init__(*args, **kwargs)
 
     submit = SubmitField(render_kw={"class": "button btn btn-primary radius size-L", 'type': 'button', "value": "提交"})
