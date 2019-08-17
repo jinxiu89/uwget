@@ -3,9 +3,10 @@
 # author:jinxiu89@163.com
 # create by thomas on 2019/8/11.
 from app.admin import admin
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, session
 from forms.category.form import Form
 from app.modules.Category import Category
+from utils.admin.common import packing_error
 
 
 @admin.route('/category', methods=['GET'])
@@ -27,8 +28,8 @@ def category_add():
             result = Category.create(data)
             return jsonify(result)
         else:
-            for key in form.errors:
-                return jsonify({'status': False, 'message': str(form.errors['key'])})
+            error = packing_error(form.errors)
+            return jsonify({'status': False, 'message': str(error)})
 
 
 @admin.route('/category/edit/<int:id>', methods=['GET', 'POST'])
@@ -44,3 +45,12 @@ def category_edit(id):
         form.sort.data = data.sort
         form.description.data = data.description
         return render_template('admin/category/edit.html', form=form, data=data)
+    if request.method == "POST":
+        id = session.get("id")
+        if form.validate_on_submit():
+            data = form.data
+            result = Category.update(data, id)
+            return jsonify(result)
+        else:
+            error = packing_error(form.errors)
+            return jsonify({'status': False, 'message': str(error)})

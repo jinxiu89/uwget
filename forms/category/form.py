@@ -8,7 +8,10 @@ from wtforms.validators import DataRequired, length
 
 
 class Form(FlaskForm):
-    pid = SelectField(label="根分类", coerce=int, validators=[DataRequired('请选择父分类')], render_kw={
+    """
+    wtforms:每一个功能一个form,
+    """
+    pid = SelectField(label="根分类", coerce=int, validators=[], render_kw={
         "class": "select valid",
         "size": 1,
         "style": "height:30px",

@@ -1,6 +1,7 @@
 {% extends "admin/base/form.html" %}
 {% block form %}
     <form action="" method="post" class="form form-horizontal" id="form-admin-add">
+        <input type="hidden" name="id" value="{{ data.id }}">
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-2">
                 <span class="c-red">*</span>父分类：

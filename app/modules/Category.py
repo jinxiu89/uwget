@@ -3,6 +3,7 @@
 # author:jinxiu89@163.com
 # create by thomas on 2019/8/5.
 from .Base import db
+
 import time
 import uuid
 
@@ -36,7 +37,7 @@ class Category(db.Model):
     @classmethod
     def choices(cls):
         category = [(i.id, i.name) for i in cls.query.all()]
-        category.insert(0, (1, "根分类"))
+        category.insert(0, (0, "根分类"))
         return category
 
     @classmethod
@@ -83,14 +84,15 @@ class Category(db.Model):
             return {'status': False, 'message': str(e)}
 
     @classmethod
-    def edit(cls, data):
+    def update(cls, data, id):
         """
 
         :param data:
         :return:
         """
+        category = cls.by_id(id)
+        print(category)
         try:
-            category = cls.by_id(data['id'])
             category.name = data['name']
             category.pid = data['pid']
             category.keywords = data['keywords']
@@ -102,4 +104,4 @@ class Category(db.Model):
             return {'status': True, 'message': "保存成功"}
         except Exception as e:
             db.session.rollback()
-            return {'status': False, 'message': str(e)}
+            return {'status': False, 'message': str(data['id'])}
