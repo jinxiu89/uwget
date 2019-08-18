@@ -9,8 +9,11 @@ from app.modules.Base import db
 from app.modules.UserAuths import UserAuth
 from app.modules.UserBase import UserBase
 from app.modules.Category import Category
+from app.modules.Posts import Posts
 
 app = create_app('default')
+
+
 @app.template_filter('getParent')
 def get_parent(id):
     from app.modules.Category import Category
@@ -18,6 +21,7 @@ def get_parent(id):
     if category is None:
         return "根分类"
     return category.name
+
 
 migrate = Migrate(app, db)
 manger = Manager(app)

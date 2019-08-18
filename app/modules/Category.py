@@ -3,9 +3,7 @@
 # author:jinxiu89@163.com
 # create by thomas on 2019/8/5.
 from .Base import db
-
-import time
-import uuid
+from .Posts import Posts  # 关系表，分文件存储表时，需要 import
 
 
 class Category(db.Model):
@@ -18,6 +16,7 @@ class Category(db.Model):
     status = db.Column(db.SmallInteger, comment="状态")
     description = db.Column(db.String(255), comment="分类描述")
     create_time = db.Column(db.Integer, comment="创建时间")
+    posts = db.relationship("Posts", backref="category", lazy="dynamic")
 
     def __repr__(self):
         data = {"name": self.name, "title": self.title}
@@ -30,7 +29,7 @@ class Category(db.Model):
         :return:
         """
         query = db.session.query(cls)
-        data = query.all()
+        data = query.order_by(cls.pid.asc(), cls.id.asc()).all()
         count = query.count()
         return data, count
 

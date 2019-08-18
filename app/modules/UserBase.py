@@ -25,6 +25,7 @@ class UserBase(db.Model):
     description = db.Column(db.Text, comment='个人简介')
     signature = db.Column(db.String(255), comment='个人签名')
     user_auth = db.relationship('UserAuth', backref="user", lazy='dynamic')
+    posts = db.relationship('Posts', backref="user", lazy="dynamic")
 
     def __repr__(self):
         data = {"name": self.name, "uuid": self.uuid}

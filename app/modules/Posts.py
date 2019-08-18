@@ -6,12 +6,21 @@ import time
 from .Base import db
 
 
-class Post(db.Model):
+class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user_base.id"), comment="用户ID，该文章属于那个用户")
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id"), comment="该文章属于哪个分类")
     name = db.Column(db.String(128), comment="文章标题")
     title = db.Column(db.String(64), unique=True, comment="文章url")
     keywords = db.Column(db.String(128), comment="文章关键词")
     description = db.Column(db.String(255), comment="文章描述")
     markdown_content = db.Column(db.Text, comment="存储markdown文本")
     content = db.Column(db.Text, comment="Post内容")
-    create_time = db.Column(db.TIMESTAMP, default=int(time.time()))
+    status = db.Column(db.SmallInteger, comment="状态")
+    marked = db.Column(db.SmallInteger, comment='推荐内容')
+    clicks = db.Column(db.Integer, default=20, comment='点击阅读数')
+    create_time = db.Column(db.TIMESTAMP, default=int(time.time()), comment='创建时间')
+    update_time = db.Column(db.Integer, default=int(time.time()), comment='更新时间')
+
+    def __repr__(self):
+        return '<title {}>'.format(self.name)

@@ -1,5 +1,5 @@
 {% extends "admin/base/index.html" %}
-{% block title %}首页{% endblock %}
+{% block title %}Post分类管理{% endblock %}
 {% block navbar %}
     <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px">
         首页
@@ -53,10 +53,11 @@
                                     </a>
                                     {% if item.status == 1 %}
                                         <a class="btn btn-warning size-MINI"
-                                           onClick="start_or_stop('{{ url_for('admin.category_stop',id=item.id) }}')"
+                                           onClick="change_status('{{ url_for('admin.category_stop',id=item.id) }}')"
                                            href="javascript:;" title="禁用"><i class="Hui-iconfont">&#xe631;</i></a>
                                     {% else %}
-                                        <a class="btn btn-secondary size-MINI" onClick="start_or_stop(this,'10001')"
+                                        <a class="btn btn-secondary size-MINI"
+                                           onClick="change_status('{{ url_for('admin.category_start',id=item.id) }}')"
                                            href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe601;</i></a>
                                     {% endif %}
                                     <a s class="btn btn-warning size-MINI" onClick="product_del(this,'10001')"
@@ -84,20 +85,18 @@
             $("#menu-post .post-category").addClass("current");
         });
 
-        function start_or_stop(url) {
+        function change_status(url) {
             $.ajax({
-                type: "POST",
+                type: "get",
                 url: url,
                 dataType: "json",
                 success: function (result) {
-                    console.log(result);return '';
                     if (result.status === true) {
-                        layer.msg(result.message, {icon: 1, time: 1000}, function () {
-                            window.parent.location.replace(location.href);
-                        });
-
+                        layer.msg(result.message, {'icon': 1, 'time': 500}, function () {
+                            window.location.replace(location.href)
+                        })
                     } else {
-                        layer.msg(result.message, {icon: 5, time: 1000})
+                        layer.msg(result.message, {'icon': 5, 'time': 6000})
                     }
                 }
             })
