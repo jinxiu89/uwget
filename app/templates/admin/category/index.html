@@ -28,8 +28,9 @@
                             <th width=4%><input name="" type="checkbox" value=""></th>
                             <th width=5%>ID</th>
                             <th width=10%>分类名称</th>
+                            <th>关键词</th>
                             <th>描述</th>
-                            <th width=6%>状态</th>
+                            <th width=6%>所属分类</th>
                             <th width=6%>操作</th>
                         </tr>
                         </thead>
@@ -39,18 +40,25 @@
                                 <td><input name="" type="checkbox" value=""></td>
                                 <td>{{ item.id }}</td>
                                 <td class="text-l">{{ item.name }}</td>
+                                <td class="text-l">{{ item.keywords }}</td>
                                 <td class="text-l">
                                     {{ item.description }}
                                 </td>
-                                <td class="td-status"><span class="label label-success radius">{{ item.status }}</span>
+                                <td>{{ item.pid|getParent }}</td>
                                 </td>
                                 <td class="td-manage text-l">
                                     <a class="btn btn-primary size-MINI"
                                        onClick="layer_show('产品编辑','{{ url_for('admin.category_edit',id=item.id) }}','','550')"
                                        href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
                                     </a>
-                                    <a class="btn btn-secondary size-MINI" onClick="product_stop(this,'10001')"
-                                       href="javascript:;" title="禁用"><i class="Hui-iconfont">&#xe631;</i></a>
+                                    {% if item.status == 1 %}
+                                        <a class="btn btn-warning size-MINI"
+                                           onClick="start_or_stop('{{ url_for('admin.category_stop',id=item.id) }}')"
+                                           href="javascript:;" title="禁用"><i class="Hui-iconfont">&#xe631;</i></a>
+                                    {% else %}
+                                        <a class="btn btn-secondary size-MINI" onClick="start_or_stop(this,'10001')"
+                                           href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe601;</i></a>
+                                    {% endif %}
                                     <a s class="btn btn-warning size-MINI" onClick="product_del(this,'10001')"
                                        href="javascript:;" title="删除">
                                         <i class="Hui-iconfont">&#xe6e2;</i>
@@ -75,5 +83,24 @@
             $("#menu-post dd").css("display", "block");
             $("#menu-post .post-category").addClass("current");
         });
+
+        function start_or_stop(url) {
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);return '';
+                    if (result.status === true) {
+                        layer.msg(result.message, {icon: 1, time: 1000}, function () {
+                            window.parent.location.replace(location.href);
+                        });
+
+                    } else {
+                        layer.msg(result.message, {icon: 5, time: 1000})
+                    }
+                }
+            })
+        }
     </script>
 {% endblock %}

@@ -2,9 +2,13 @@
 # _*_ coding:utf-8_*_
 # author:jinxiu89@163.com
 # create by thomas on 2019/8/11.
+import uuid
+import time
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, RadioField, TextAreaField, SelectField, IntegerField
 from wtforms.validators import DataRequired, length
+from app.modules.Base import db
+from app.modules.Category import Category
 
 
 class Form(FlaskForm):
@@ -38,3 +42,45 @@ class Form(FlaskForm):
         super(Form, self).__init__(*args, **kwargs)
 
     submit = SubmitField(render_kw={"class": "button btn btn-primary radius size-L", 'type': 'button', "value": "提交"})
+
+    def create(self):
+        """
+        根新和新增为什么放在form里做呢？
+        因为方便，符合flask-wtforms 的设计逻辑，理应如此
+        """
+        result = Category(
+            pid=self.pid.data,
+            name=self.name.data,
+            title=uuid.uuid4().hex,
+            keywords=self.keywords.data,
+            sort=self.sort.data,
+            status=self.status.data,
+            description=self.description.data,
+            create_time=int(time.time())
+        )
+        try:
+            db.session.add(result)
+            db.session.commit()
+            return {'status': True, 'message': "创建成功"}
+        except Exception as e:
+            db.session.rollback()
+            return {'status': False, 'message': str(e)}
+
+    def update(self, category):
+        """
+        根新和新增为什么放在form里做呢？
+        因为方便，符合flask-wtforms 的设计逻辑，理应如此
+        """
+        try:
+            category.name = self.name.data
+            category.pid = self.pid.data
+            category.keywords = self.keywords.data
+            category.sort = self.sort.data
+            category.status = self.status.data
+            category.description = self.description.data
+            db.session.add(category)
+            db.session.commit()
+            return {'status': True, 'message': "保存成功"}
+        except Exception as e:
+            db.session.rollback()
+            return {'status': False, 'message': str(e)}

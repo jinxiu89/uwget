@@ -24,8 +24,7 @@ def category_add():
         return render_template('admin/category/add.html', form=form)
     if request.method == "POST":
         if form.validate_on_submit():
-            data = form.data
-            result = Category.create(data)
+            result = form.create()
             return jsonify(result)
         else:
             error = packing_error(form.errors)
@@ -46,11 +45,21 @@ def category_edit(id):
         form.description.data = data.description
         return render_template('admin/category/edit.html', form=form, data=data)
     if request.method == "POST":
-        id = session.get("id")
+        category = Category.by_id(id)
         if form.validate_on_submit():
-            data = form.data
-            result = Category.update(data, id)
+            result = form.update(category)
             return jsonify(result)
         else:
             error = packing_error(form.errors)
             return jsonify({'status': False, 'message': str(error)})
+
+
+@admin.route('/category/category_stop/<int:id>', methods=['GET', 'POST'])
+def category_stop(id):
+    if request.method == "POST":
+        return {'status': True, 'message': id}
+        category = Category.by_id(id)
+        category.status = 2
+        result = Category.change_status(category)
+        return jsonify(result)
+    return jsonify(result)

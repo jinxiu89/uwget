@@ -11,6 +11,14 @@ from app.modules.UserBase import UserBase
 from app.modules.Category import Category
 
 app = create_app('default')
+@app.template_filter('getParent')
+def get_parent(id):
+    from app.modules.Category import Category
+    category = Category.by_id(id)
+    if category is None:
+        return "根分类"
+    return category.name
+
 migrate = Migrate(app, db)
 manger = Manager(app)
 manger.add_command("db", MigrateCommand)

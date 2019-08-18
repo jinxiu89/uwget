@@ -59,49 +59,10 @@ class Category(db.Model):
         return db.session.query(cls).filter_by(name=name).first()
 
     @classmethod
-    def create(cls, data):
-        """
-        当验证过后，就开始保存
-        :param data:
-        :return:
-        """
-        result = Category(
-            pid=data['pid'],
-            name=data['name'],
-            title=uuid.uuid4().hex,
-            keywords=data['keywords'],
-            sort=data['sort'],
-            status=data['status'],
-            description=data['description'],
-            create_time=int(time.time())
-        )
+    def change_status(cls, category):
         try:
-            db.session.add(result)
-            db.session.commit()
-            return {'status': True, 'message': "创建成功"}
-        except Exception as e:
-            db.session.rollback()
-            return {'status': False, 'message': str(e)}
-
-    @classmethod
-    def update(cls, data, id):
-        """
-
-        :param data:
-        :return:
-        """
-        category = cls.by_id(id)
-        print(category)
-        try:
-            category.name = data['name']
-            category.pid = data['pid']
-            category.keywords = data['keywords']
-            category.sort = data['sort']
-            category.status = data['status']
-            category.description = data['description']
             db.session.add(category)
             db.session.commit()
-            return {'status': True, 'message': "保存成功"}
+            return {'status': True, 'message': "成功！"}
         except Exception as e:
-            db.session.rollback()
-            return {'status': False, 'message': str(data['id'])}
+            return {'status': False, 'message': str(e)}

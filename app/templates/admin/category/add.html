@@ -75,13 +75,11 @@
                     data: postData,
                     'success': function (result) {
                         if (result.status === true) {
-                            layer.msg(result.message, {'icon': 1}, function () {
+                            layer.msg(result.message, {'icon': 1, 'time': 2000}, function () {
                                 window.parent.location.reload();
                             })
                         } else {
-                            layer.msg(result.message, {'icon': 5}, function () {
-                                window.parent.location.reload();
-                            })
+                            layer.msg(result.message, {'icon': 5, 'time': 6000})
                         }
                     }
                 });
