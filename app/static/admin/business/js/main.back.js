@@ -1,33 +1,6 @@
 /* 这里面是整个系统业务相关的js代码 */
 
-function runDatetimePicker(){
-  $("#search-datetime-start").datetimepicker({
-    language:  'zh-cn',
-    format: 'yyyy-mm-dd hh:ii',
-    minView: "month",
-    todayBtn:  1,
-    autoclose: 1,
-    endDate : new Date(),
-  }).on('changeDate', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    var startTime = event.date;
-    $('#search-datetime-end').datetimepicker('setStartDate',startTime);
-  });
-  $("#search-datetime-end").datetimepicker({
-    language:  'zh-cn',
-    format: 'yyyy-mm-dd hh:ii',
-    minView: "month",
-    todayBtn:  1,
-    autoclose: 1,
-    endDate : new Date(),
-  }).on('changeDate', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    var endTime = event.date;
-    $("#search-datetime-start").datetimepicker('setEndDate',endTime);
-  });
-}
+
 
 // 提取URL中参数为对象
 function parseQueryString(url){
