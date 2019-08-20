@@ -1,4 +1,7 @@
 {% extends "admin/base/form.html" %}
+{% block style %}
+        <link rel="stylesheet" href="{{ url_for("static",filename="admin/libs/editormd/css/editormd.css") }}">
+{% endblock %}
 {% block form %}
     <form action="" method="post" class="form form-horizontal" id="form-admin-add">
         <div class="row clearfix">
@@ -38,7 +41,9 @@
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-2">正文：</label>
             <div class="form-controls col-xs-8 col-sm-9">
-                {{ form.markdown }}
+                <div id="markdown">
+                    <textarea name='markdown' style="display:none;"></textarea>
+                </div>
             </div>
         </div>
         <div class="row clearfix">
@@ -56,6 +61,7 @@
             src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/validate-methods.js") }}"></script>
     <script type="text/javascript"
             src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/messages_zh.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='admin/libs/editormd/editormd.min.js') }}"></script>
     <script type="text/javascript">
         $(function () {
             $(".description-textarea").Huitextarealength({
@@ -83,6 +89,26 @@
                         }
                     }
                 });
+            });
+        });
+        var Editor;
+        $(function () {
+            Editor = editormd("markdown", {
+                width: "100%",
+                height: 740,
+                path: "{{ url_for("static",filename="admin/libs/editormd/lib/") }}",
+                htmlDecode: "style,script,iframe",
+                tex: true,
+                emoji: true,
+                taskList: true,
+                flowChart: true,
+                sequenceDiagram: true,
+                saveHTMLToTextarea: true,
+                markdown : "##在这里尽情的书写你娴熟的markdown吧",
+                //image upload
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                {#imageUploadURL: ""#}
             });
         });
     </script>

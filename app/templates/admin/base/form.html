@@ -27,6 +27,7 @@
     <title>{% block title %}{% endblock %}- h-ui.admin.pro v1.0</title>
     {% block seo %}
     {% endblock %}
+    {% block style %}{% endblock %}
 </head>
 <body>
 <article class="clearfix pd-20">
@@ -113,9 +114,12 @@
 
 <!--请在下方写此页面业务相关的脚本-->
 {% block javascript %}
-    <script type="text/javascript" src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/jquery.validate.js") }}"></script>
-    <script type="text/javascript" src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/validate-methods.js") }}"></script>
-    <script type="text/javascript" src="{{ url_rof('static',filename="admin/libs/jquery.validation/1.14.0/messages_zh.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/jquery.validate.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/validate-methods.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_rof('static',filename="admin/libs/jquery.validation/1.14.0/messages_zh.js") }}"></script>
     <script type="text/javascript">
         $(function () {
             /* 通过iCheck插件，美化checkbox */

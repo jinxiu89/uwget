@@ -31,6 +31,7 @@
         <meta name="keywords" content="blog">
         <meta name="description" content="base">
     {% endblock %}
+    {% block style %}{% endblock %}
 </head>
 <body>
 <!--_menu 作为公共模版分离出去-->
@@ -57,9 +58,9 @@
                 空白页面
             </nav>
         {% endblock %}
-    {% block main %}
-{#        此处是功能区主要放置区域#}
-    {% endblock %}
+        {% block main %}
+            {#        此处是功能区主要放置区域#}
+        {% endblock %}
     </div>
 </section>
 <!--_footer 作为公共模版分离出去-->
