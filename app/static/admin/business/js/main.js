@@ -39,6 +39,14 @@ function add_640(title, url) {
     });
     layer.full(index);
 }
+function full(title, url) {
+    var index = layer.open({
+        type: 2,
+        title: title,
+        content: url
+    });
+    layer.full(index);
+}
 
 /*弹出层*/
 
