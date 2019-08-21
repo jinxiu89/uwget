@@ -63,7 +63,7 @@ class Form(FlaskForm):
         result = Posts(
             category_id=self.category_id.data,
             title=uuid.uuid4().hex,
-            user_id=1,
+            uuid=eval(session.get("user"))['uuid'],
             name=self.name.data,
             subtitle=self.subtitle.data,
             keywords=self.keywords.data,
