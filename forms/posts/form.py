@@ -5,19 +5,16 @@
 import uuid
 import time
 from flask_wtf import FlaskForm
+from flask import session
 from wtforms import StringField, SubmitField, RadioField, TextAreaField, SelectField, IntegerField
 from wtforms.validators import DataRequired, length
 from app.modules.Base import db
+from app.modules.Posts import Posts
 
-
-# from app.modules.Category import Category
 
 class Form(FlaskForm):
-    category_id = SelectField(label="所属分类", coerce=int, validators=[], render_kw={
-        "class": "select valid",
-        "size": 1,
-        "style": "height:30px",
-    })
+    category_id = SelectField(label="所属分类", coerce=int, validators=[],
+                              render_kw={"class": "select valid", "size": 1, "style": "height:30px", })
 
     name = StringField(label="文章标题", validators=[DataRequired('文章标题必须输入')], description="文章标题",
                        render_kw={"id": "name", "class": "input-text size-L",
@@ -30,24 +27,58 @@ class Form(FlaskForm):
                            description="SEO字段，搜索引擎所属内容",
                            render_kw={"id": "keywords", "class": "input-text size-L",
                                       "placeholder": "关键词，是SEO必备的内容，用于索引本文内容"})
-    description = StringField(label="描述", validators=[DataRequired("描述必须填写"), length(8, 255)],
-                              description="SEO描述，用于用户搜索查看内容概述",
-                              render_kw={"id": "description", "class": "input-text size-L",
-                                         "placeholder": "描述，是SEO必备的内容，用于搜索结果也的文章概述"})
-    markdown = TextAreaField(label="正文", description="正文",
-                             render_kw={"class": "textarea", "rows": "", "cols": "", "placeholder": "100",
-                                        "id": "markdown"})
+
     status = RadioField(label="状态", validators=[DataRequired("状态必须选择一个")], coerce=int, choices=((1, '启用'), (2, '禁用')),
                         render_kw={
                             "class": "radio-box"
                         })
+
     marked = RadioField(label="推荐", validators=[DataRequired("必须选择一个")], coerce=int, choices=((1, '推荐'), (2, '不推荐')),
                         render_kw={
                             "class": "radio-box"
                         })
+
+    description = StringField(label="描述", validators=[DataRequired("描述必须填写"), length(8, 255)],
+                              description="SEO描述，用于用户搜索查看内容概述",
+                              render_kw={"id": "description", "class": "input-text size-L",
+                                         "placeholder": "描述，是SEO必备的内容，用于搜索结果也的文章概述"})
+
+    markdown = TextAreaField(label="正文", description="正文",
+                             render_kw={"class": "textarea", "rows": "", "cols": "", "placeholder": "100",
+                                        "id": "markdown"})
+    markdown_html_code = TextAreaField(label="html", description="html",
+                                       render_kw={"class": "textarea", "rows": "", "cols": "", "placeholder": "100",
+                                                  "id": "markdown_html_code"})
+
     references = TextAreaField(label="参考连接",
                                render_kw={"class": "textarea", "rows": "", "cols": "", "placeholder": "100",
                                           "id": "references"})
 
     def __init__(self, *args, **kwargs):
         super(Form, self).__init__(*args, **kwargs)
+
+    submit = SubmitField(render_kw={"class": "button btn btn-primary radius size-L", 'type': 'button', "value": "提交"})
+
+    def create(self):
+        result = Posts(
+            category_id=self.category_id.data,
+            title=uuid.uuid4().hex,
+            user_id=1,
+            name=self.name.data,
+            subtitle=self.subtitle.data,
+            keywords=self.keywords.data,
+            status=self.status.data,
+            marked=self.marked.data,
+            description=self.description.data,
+            markdown=self.markdown.data,
+            markdown_html_code=self.markdown_html_code.data,
+            references=self.references.data,
+            create_time=int(time.time()),
+        )
+        try:
+            db.session.add(result)
+            db.session.commit()
+            return {'status': True, 'message': "创建成功"}
+        except Exception as e:
+            db.session.rollback()
+            return {'status': False, 'message': str(e)}

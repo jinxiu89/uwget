@@ -19,3 +19,10 @@ def post_add():
     form.category_id.choices = Category.choices()
     if request.method == "GET":
         return render_template('admin/posts/add.html', form=form)
+    if request.method == "POST":
+        if form.validate_on_submit():
+            result = form.create()
+            return jsonify(result)
+        else:
+            error = packing_error(form.errors)
+            return jsonify({'status': False, 'message': str(error)})

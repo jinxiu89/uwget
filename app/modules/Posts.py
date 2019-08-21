@@ -16,7 +16,7 @@ class Posts(db.Model):
     description = db.Column(db.String(255), comment="文章描述")
     title = db.Column(db.String(64), unique=True, comment="文章url")
     markdown = db.Column(db.Text, comment="存储markdown文本")
-    html = db.Column(db.Text, comment="Post内容")
+    markdown_html_code = db.Column(db.Text, comment="Post内容")
     status = db.Column(db.SmallInteger, comment="状态")
     marked = db.Column(db.SmallInteger, comment='推荐内容')
     clicks = db.Column(db.Integer, default=20, comment='点击阅读数')
