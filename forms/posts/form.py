@@ -82,3 +82,27 @@ class Form(FlaskForm):
         except Exception as e:
             db.session.rollback()
             return {'status': False, 'message': str(e)}
+
+    def update(self, data):
+        """
+                根新和新增为什么放在form里做呢？
+                因为方便，符合flask-wtforms 的设计逻辑，理应如此
+                """
+        try:
+            data.category_id = self.category_id.data
+            data.name = self.name.data
+            data.subtitle = self.subtitle.data
+            data.keywords = self.keywords.data
+            data.status = self.status.data
+            data.marked = self.marked.data
+            data.description = self.description.data
+            data.markdown = self.markdown.data
+            data.markdown_html_code = self.markdown_html_code.data
+            data.references = self.references.data
+            data.update_time = int(time.time())
+            db.session.add(data)
+            db.session.commit()
+            return {'status': True, 'message': "保存成功"}
+        except Exception as e:
+            db.session.rollback()
+            return {'status': False, 'message': str(e)}

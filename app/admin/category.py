@@ -35,8 +35,8 @@ def category_add():
 def category_edit(id):
     form = Form()
     form.pid.choices = Category.choices()
+    data = Category.by_id(id)
     if request.method == "GET":
-        data = Category.by_id(id)
         form.pid.data = data.pid
         form.name.data = data.name
         form.keywords.data = data.keywords
@@ -45,9 +45,8 @@ def category_edit(id):
         form.description.data = data.description
         return render_template('admin/category/edit.html', form=form, data=data)
     if request.method == "POST":
-        category = Category.by_id(id)
         if form.validate_on_submit():
-            result = form.update(category)
+            result = form.update(data)
             return jsonify(result)
         else:
             error = packing_error(form.errors)

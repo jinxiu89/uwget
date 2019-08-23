@@ -4,6 +4,7 @@
 {% endblock %}
 {% block form %}
     <form action="" method="post" class="form form-horizontal" id="form-admin-add">
+        <input type="hidden" name="id" value="{{ data.id }}">
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-1">
                 <span class="c-red">*</span>{{ form.category_id.label }}：
@@ -57,7 +58,7 @@
             <label class="form-label col-xs-4 col-sm-1">{{ form.markdown.label }}：</label>
             <div class="form-controls col-xs-8 col-sm-11">
                 <div id="markdown">
-                    <textarea name='markdown' style="display:none;"></textarea>
+                    <textarea name='markdown' style="display:none;">{{ form.markdown.data }}</textarea>
                 </div>
             </div>
         </div>
@@ -121,7 +122,7 @@
                 delete postData['markdown-html-code'];
                 console.log(postData);
                 $.ajax({
-                    url: "{{ url_for('admin.post_add') }}",
+                    url: "{{ url_for('admin.post_edit',id=data.id) }}",
                     type: "POST",
                     data: postData,
                     'success': function (result) {
@@ -149,7 +150,6 @@
                 flowChart: true,
                 sequenceDiagram: true,
                 saveHTMLToTextarea: true,
-                markdown: "##在这里尽情的书写你娴熟的markdown吧",
                 //image upload
                 imageUpload: true,
                 imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],

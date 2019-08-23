@@ -26,3 +26,14 @@ class Posts(db.Model):
 
     def __repr__(self):
         return '<title {}>'.format(self.name)
+
+    @classmethod
+    def all(cls):
+        query = db.session.query(cls)
+        data = query.order_by(cls.id.asc(), cls.clicks.desc()).all()
+        count = query.count()
+        return data, count
+
+    @classmethod
+    def by_id(cls, id):
+        return db.session.query(cls).filter_by(id=id).first()
