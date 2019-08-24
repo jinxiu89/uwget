@@ -7,7 +7,7 @@ from flask_github import GitHub
 
 from app.user import user
 from utils.user.UserAuth import auth_github
-from app.admin.dashboard import admin_dashboard
+from app.admin.index.dashboard import admin_dashboard
 
 Github = GitHub()
 

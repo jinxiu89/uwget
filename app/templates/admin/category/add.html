@@ -70,7 +70,7 @@
                     postData[this.name] = this.value
                 });
                 $.ajax({
-                    url: "{{ url_for('admin.category_add') }}",
+                    url: "{{ url_for('admin.admin_category_add') }}",
                     type: "POST",
                     data: postData,
                     'success': function (result) {

@@ -121,7 +121,7 @@
                 delete postData['markdown-html-code'];
                 console.log(postData);
                 $.ajax({
-                    url: "{{ url_for('admin.post_add') }}",
+                    url: "{{ url_for('admin.admin_post_add') }}",
                     type: "POST",
                     data: postData,
                     'success': function (result) {

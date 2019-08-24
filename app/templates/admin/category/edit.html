@@ -71,7 +71,7 @@
                     postData[this.name] = this.value
                 });
                 $.ajax({
-                    url: "{{ url_for('admin.category_edit',id=data['id']) }}",
+                    url: "{{ url_for('admin.admin_category_edit',id=data['id']) }}",
                     type: "POST",
                     data: postData,
                     'success': function (result) {

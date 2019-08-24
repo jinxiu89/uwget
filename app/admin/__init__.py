@@ -5,6 +5,6 @@
 from flask import Blueprint
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
-from .dashboard import *
-from .category import *
-from .posts import *
+from .index.dashboard import *
+from .content.category import *
+from .content.posts import *

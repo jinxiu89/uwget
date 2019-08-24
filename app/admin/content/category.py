@@ -10,14 +10,14 @@ from utils.admin.common import packing_error
 
 
 @admin.route('/category', methods=['GET'])
-def category_list():
+def admin_category_list():
     if request.method == 'GET':
         data, count = Category.all()
         return render_template('admin/category/index.html', data=data, count=count)
 
 
 @admin.route('/category/add', methods=['GET', 'POST'])
-def category_add():
+def admin_category_add():
     form = Form()
     form.pid.choices = Category.choices()
     if request.method == "GET":
@@ -32,7 +32,7 @@ def category_add():
 
 
 @admin.route('/category/edit/<int:id>', methods=['GET', 'POST'])
-def category_edit(id):
+def admin_category_edit(id):
     form = Form()
     form.pid.choices = Category.choices()
     data = Category.by_id(id)
@@ -54,7 +54,7 @@ def category_edit(id):
 
 
 @admin.route('/category/category_stop/<int:id>', methods=['GET'])
-def category_stop(id):
+def admin_category_stop(id):
     if request.method == "GET":
         category = Category.by_id(id)
         category.status = 2
@@ -63,7 +63,7 @@ def category_stop(id):
 
 
 @admin.route('/category/category_start/<int:id>', methods=['GET'])
-def category_start(id):
+def admin_category_start(id):
     if request.method == "GET":
         category = Category.by_id(id)
         category.status = 1

@@ -10,13 +10,13 @@ from app.modules.Posts import Posts
 
 
 @admin.route('/posts', methods=['GET'])
-def posts_list():
+def admin_posts_list():
     data, count = Posts.all()
     return render_template('admin/posts/index.html', data=data, count=count)
 
 
 @admin.route('/post/add', methods=['GET', 'POST'])
-def post_add():
+def admin_post_add():
     form = Form()
     form.category_id.choices = Category.choices()
     if request.method == "GET":
@@ -31,7 +31,7 @@ def post_add():
 
 
 @admin.route('/post/edit/<int:id>', methods=['GET', 'POST'])
-def post_edit(id):
+def admin_post_edit(id):
     form = Form()
     form.category_id.choices = Category.choices()
     data = Posts.by_id(id)

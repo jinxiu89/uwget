@@ -10,6 +10,7 @@ from app.modules.UserAuths import UserAuth
 from app.modules.UserBase import UserBase
 from app.modules.Category import Category
 from app.modules.Posts import Posts
+from app.modules.Language import Language
 
 app = create_app('default')
 
