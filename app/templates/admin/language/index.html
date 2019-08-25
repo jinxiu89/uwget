@@ -16,8 +16,8 @@
                 <div class="clearfix">
 							<span class="f-l">
 								<a class="btn btn-primary radius"
-                                   onclick="layer_show('添加分类','{{ url_for("admin.category_add") }}','','560')"
-                                   href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i> 添加分类</a>
+                                   onclick="layer_show('添加语言','{{ url_for("admin.admin_language_add") }}','','350')"
+                                   href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i> 添加语言</a>
 							</span>
                     <span class="f-r">共有数据：<strong>{{ count }}</strong> 条</span>
                 </div>
@@ -28,9 +28,7 @@
                             <th width=4%><input name="" type="checkbox" value=""></th>
                             <th width=5%>ID</th>
                             <th width=10%>分类名称</th>
-                            <th>关键词</th>
-                            <th>描述</th>
-                            <th width=6%>所属分类</th>
+                            <th width=10%>CODE</th>
                             <th width=6%>操作</th>
                         </tr>
                         </thead>
@@ -40,24 +38,19 @@
                                 <td><input name="" type="checkbox" value=""></td>
                                 <td>{{ item.id }}</td>
                                 <td class="text-l">{{ item.name }}</td>
-                                <td class="text-l">{{ item.keywords }}</td>
-                                <td class="text-l">
-                                    {{ item.description }}
-                                </td>
-                                <td>{{ item.pid|getParent }}</td>
-                                </td>
+                                <td class="text-l">{{ item.code }}</td>
                                 <td class="td-manage text-l">
                                     <a class="btn btn-primary size-MINI"
-                                       onClick="layer_show('产品编辑','{{ url_for('admin.category_edit',id=item.id) }}','','550')"
+                                       onClick="layer_show('产品编辑','{{ url_for('admin.admin_category_edit',id=item.id) }}','','550')"
                                        href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
                                     </a>
                                     {% if item.status == 1 %}
                                         <a class="btn btn-warning size-MINI"
-                                           onClick="change_status('{{ url_for('admin.category_stop',id=item.id) }}')"
+                                           onClick="change_status('{{ url_for('admin.admin_category_stop',id=item.id) }}')"
                                            href="javascript:;" title="禁用"><i class="Hui-iconfont">&#xe631;</i></a>
                                     {% else %}
                                         <a class="btn btn-secondary size-MINI"
-                                           onClick="change_status('{{ url_for('admin.category_start',id=item.id) }}')"
+                                           onClick="change_status('{{ url_for('admin.admin_category_start',id=item.id) }}')"
                                            href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe601;</i></a>
                                     {% endif %}
                                     <a s class="btn btn-warning size-MINI" onClick="product_del(this,'10001')"
