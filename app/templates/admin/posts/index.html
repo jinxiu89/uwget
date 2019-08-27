@@ -36,11 +36,9 @@
             <div class="panel-body" 发布>
                 <div class="clearfix">
 							<span class="f-l">
-								<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i
-                                        class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
 								<a class="btn btn-primary radius"
-                                   onclick="full('添加产品','{{ url_for('admin.admin_post_add') }}')"
-                                   href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加产品</a>
+                                   onclick="full('添加POST文','{{ url_for('admin.admin_post_add') }}')"
+                                   href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加POST文</a>
 							</span>
                     <span class="f-r">共有数据：<strong>{{ count }}</strong> 条</span>
                 </div>
@@ -49,7 +47,7 @@
                         <thead>
                         <tr class="text-c">
                             <th width=6%>ID</th>
-                            <th width=20%>产品名称</th>
+                            <th width=20%>POST文名称</th>
                             <th width=20%>关键词</th>
                             <th>描述</th>
                             <th width=8%>发布状态</th>
