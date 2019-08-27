@@ -1,5 +1,5 @@
 {% extends "admin/base/index.html" %}
-{% block title %}Post分类管理{% endblock %}
+{% block title %}语言管理{% endblock %}
 {% block navbar %}
     <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px">
         首页
@@ -25,35 +25,33 @@
                     <table class="table table-border table-bordered table-bg table-hover table-sort">
                         <thead>
                         <tr class="text-c">
-                            <th width=4%><input name="" type="checkbox" value=""></th>
                             <th width=5%>ID</th>
-                            <th width=10%>分类名称</th>
+                            <th width=10%>语言名称</th>
                             <th width=10%>CODE</th>
-                            <th width=6%>操作</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for item in data %}
                             <tr class="text-c va-m">
-                                <td><input name="" type="checkbox" value=""></td>
                                 <td>{{ item.id }}</td>
                                 <td class="text-l">{{ item.name }}</td>
                                 <td class="text-l">{{ item.code }}</td>
                                 <td class="td-manage text-l">
                                     <a class="btn btn-primary size-MINI"
-                                       onClick="layer_show('产品编辑','{{ url_for('admin.admin_category_edit',id=item.id) }}','','550')"
+                                       onClick="layer_show('语言编辑','{{ url_for('admin.admin_language_edit',id=item.id) }}','','350')"
                                        href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
                                     </a>
                                     {% if item.status == 1 %}
                                         <a class="btn btn-warning size-MINI"
-                                           onClick="change_status('{{ url_for('admin.admin_category_stop',id=item.id) }}')"
+                                           onClick="change_status('{{ url_for('admin.admin_language_stop',id=item.id) }}')"
                                            href="javascript:;" title="禁用"><i class="Hui-iconfont">&#xe631;</i></a>
                                     {% else %}
                                         <a class="btn btn-secondary size-MINI"
-                                           onClick="change_status('{{ url_for('admin.admin_category_start',id=item.id) }}')"
+                                           onClick="change_status('{{ url_for('admin.admin_language_start',id=item.id) }}')"
                                            href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe601;</i></a>
                                     {% endif %}
-                                    <a s class="btn btn-warning size-MINI" onClick="product_del(this,'10001')"
+                                    <a class="btn btn-warning size-MINI" onClick="product_del(this,'10001')"
                                        href="javascript:;" title="删除">
                                         <i class="Hui-iconfont">&#xe6e2;</i>
                                     </a>
@@ -73,9 +71,9 @@
     <script type="text/javascript" src="{{ url_for('static',filename="admin/business/js/main.js") }}"></script>
     <script>
         $(function () {
-            $("#menu-post dt").addClass("selected");
-            $("#menu-post dd").css("display", "block");
-            $("#menu-post .post-category").addClass("current");
+            $("#menu-system dt").addClass("selected");
+            $("#menu-system dd").css("display", "block");
+            $("#menu-system .system-language").addClass("current");
         });
 
         function change_status(url) {

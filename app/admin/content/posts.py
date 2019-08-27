@@ -7,6 +7,7 @@ from flask import render_template, request, jsonify, session
 from forms.posts.form import Form
 from app.modules.Category import Category
 from app.modules.Posts import Posts
+from utils.admin.common import packing_error
 
 
 @admin.route('/posts', methods=['GET'])
@@ -55,3 +56,26 @@ def admin_post_edit(id):
             else:
                 error = packing_error(form.errors)
                 return jsonify({'status': False, 'message': str(error)})
+
+
+@admin.route('/post/start/<int:id>', methods=['GET'])
+def admin_post_start(id):
+    if request.method == 'GET':
+        data = Posts.by_id(id)
+        if data.status == 1:
+            return jsonify({'status': True, 'message': "已发布！"})
+        data.status = 1
+        result = Posts.change_status(data)
+        return jsonify(result)
+
+
+@admin.route('/post/stop/<int:id>', methods=['GET'])
+def admin_post_stop(id):
+    if request.method == "GET":
+        data = Posts.by_id(id)
+        if data.status == 2:
+            return jsonify({'status': True, 'message': "已删除！"})
+        data.status = 2
+        result = Posts.change_status(data)
+        return jsonify(result)
+

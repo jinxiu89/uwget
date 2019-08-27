@@ -24,3 +24,16 @@ class Language(db.Model):
         data = query.order_by(cls.id.asc()).all()
         count = query.count()
         return data, count
+
+    @classmethod
+    def by_id(cls, id):
+        return db.session.query(cls).filter_by(id=id).first()
+
+    @classmethod
+    def change_status(cls, data):
+        try:
+            db.session.add(data)
+            db.session.commit()
+            return {'status': True, 'message': "成功！"}
+        except Exception as e:
+            return {'status': False, 'message': str(e)}

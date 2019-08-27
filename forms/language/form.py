@@ -33,3 +33,15 @@ class Form(FlaskForm):
         except Exception as e:
             db.session.rollback()
             return {'status': False, 'message': str(e)}
+
+    def update(self, data):
+        try:
+            data.name = self.name.data
+            data.code = self.code.data
+            data.status = self.status.data
+            data.update_time = int(time.time())
+            db.session.add(data)
+            db.session.commit()
+            return {'status': True, 'message': "保存成功"}
+        except Exception as e:
+            return {'status': False, 'message': str(e)}

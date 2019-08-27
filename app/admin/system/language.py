@@ -6,6 +6,7 @@ from app.admin import admin
 from flask import render_template, request, jsonify, session
 from forms.language.form import Form
 from app.modules.Language import Language
+from utils.admin.common import packing_error
 
 
 @admin.route('/language', methods=['GET', 'POST'])
@@ -27,3 +28,39 @@ def admin_language_add():
         else:
             error = packing_error(form.errors)
             return jsonify({'status': False, 'message': str(error)})
+
+
+@admin.route('/language/edit/<int:id>', methods=['GET', 'POST'])
+def admin_language_edit(id):
+    form = Form()
+    data = Language.by_id(id)
+    if request.method == "GET":
+        form.name.data = data.name
+        form.code.data = data.code
+        form.status.data = data.status
+        return render_template('admin/language/edit.html', form=form, data=data)
+    if request.method == "POST":
+        if form.validate_on_submit():
+            result = form.update(data)
+            return jsonify(result)
+        else:
+            error = packing_error(form.errors)
+            return jsonify({'status': False, 'message': str(error)})
+
+
+@admin.route('/language/stop/<int:id>', methods=['GET', 'POST'])
+def admin_language_stop(id):
+    if request.method == "GET":
+        data = Language.by_id(id)
+        data.status = 2
+        result = Language.change_status(data)
+        return jsonify(result)
+
+
+@admin.route('/language/start/<int:id>', methods=['GET', 'POST'])
+def admin_language_start(id):
+    if request.method == "GET":
+        data = Language.by_id(id)
+        data.status = 1
+        result = Language.change_status(data)
+        return jsonify(result)
