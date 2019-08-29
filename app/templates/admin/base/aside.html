@@ -49,16 +49,16 @@
         <dl id="menu-system" class="Hui-menu">
             <dt class="Hui-menu-title"><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i
                     class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
-            <dd class="Hui-menu-item">
+            <dd class="Hui-menu-item level-top">
                 <ul>
                     <li class="system-language"><a href="{{ url_for('admin.admin_language_list') }}"
                                                    title="语言管理">语言管理</a></li>
                     <li class="user-manger">
                         <dl class="Hui-menu">
-                            <dt class="Hui-menu-title">管理员<i
+                            <dt class="Hui-menu-title manager-title">管理员<i
                                     class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i>
                             </dt>
-                            <dd class="Hui-menu-item">
+                            <dd class="Hui-menu-item manager-item">
                                 <ul>
                                     <li class="permission_group"><a href="{{ url_for('admin.admin_permission_group') }}" title="权限管理">权限组</a></li>
                                     <li><a href="admin-permission.html" title="权限管理">权限管理</a></li>

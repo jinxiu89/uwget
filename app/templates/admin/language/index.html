@@ -72,10 +72,9 @@
     <script>
         $(function () {
             $("#menu-system dt").addClass("selected");
-            $("#menu-system dd").css("display", "block");
+            $("#menu-system .level-top").css("display", "block");
             $("#menu-system .system-language").addClass("current");
         });
-
         function change_status(url) {
             $.ajax({
                 type: "get",
