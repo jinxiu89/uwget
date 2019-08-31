@@ -9,3 +9,6 @@ from .index.dashboard import *
 from .content.category import *
 from .content.posts import *
 from .system import (language, permissionGroup)
+from .context import *
+from .filter import *
+from .decorate import *

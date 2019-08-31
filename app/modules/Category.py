@@ -2,8 +2,10 @@
 # _*_ coding:utf-8_*_
 # author:jinxiu89@163.com
 # create by thomas on 2019/8/5.
+import json
 from .Base import db
 from .Posts import Posts  # 关系表，分文件存储表时，需要 import
+from flask import jsonify
 
 
 class Category(db.Model):
@@ -19,7 +21,12 @@ class Category(db.Model):
     posts = db.relationship("Posts", backref="category", lazy="dynamic")
 
     def __repr__(self):
-        data = {"name": self.name, "title": self.title}
+        data = {
+            "id": self.id,
+            "pid": self.pid,
+            "name": self.name,
+            "title": self.title
+        }
         return '{}'.format(data)
 
     @classmethod
@@ -37,6 +44,15 @@ class Category(db.Model):
     def choices(cls):
         category = [(i.id, i.name) for i in cls.query.all()]
         category.insert(0, (0, "根分类"))
+        return category
+
+    @classmethod
+    def toLayer(cls):
+        # category = [[i.id, i.pid, i.name, i.title] for i in cls.query.all()]
+        category = [{'id': i.id, 'pid': i.pid, 'name': i.name, 'title': i.title} for i in cls.query.all()]
+        # json_data = jsonify(category[0])
+        # for item in category:
+        #     json_data.append(jsonify(item))
         return category
 
     @classmethod

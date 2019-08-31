@@ -25,7 +25,13 @@ class Posts(db.Model):
     update_time = db.Column(db.Integer, default=int(time.time()), comment='更新时间')
 
     def __repr__(self):
-        return '<title {}>'.format(self.name)
+        data = {
+            'id': self.id,
+            'name': self.name,
+            'title': self.title,
+            'create_time': self.create_time
+        }
+        return '{}'.format(data)
 
     @classmethod
     def all(cls):
@@ -46,3 +52,10 @@ class Posts(db.Model):
             return {'status': True, 'message': "处理成功！"}
         except Exception as e:
             return {'status': False, 'message': str(e)}
+
+    @classmethod
+    def by_category(cls, category_id):
+        query = db.session.query(cls).filter_by(category_id=category_id)
+        data = query.order_by(cls.id.asc()).all()
+        count = query.count()
+        return data, count

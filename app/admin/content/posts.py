@@ -2,17 +2,26 @@
 # _*_ coding:utf-8_*_
 # author:jinxiu89@163.com
 # create by thomas on 2019/8/18.
+import json
 from app.admin import admin
 from flask import render_template, request, jsonify, session
 from forms.posts.form import Form
 from app.modules.Category import Category
 from app.modules.Posts import Posts
 from utils.admin.common import packing_error
+from libs.classify import Classify
 
 
 @admin.route('/posts', methods=['GET'])
 def admin_posts_list():
     data, count = Posts.all()
+    return render_template('admin/posts/index.html', data=data, count=count)
+
+
+@admin.route('/posts/category/<int:category_id>', methods=['GET'])
+def admin_post_category_list(category_id):
+    category = Category.toLayer()
+    data, count = Posts.by_category(category_id)
     return render_template('admin/posts/index.html', data=data, count=count)
 
 
@@ -78,4 +87,3 @@ def admin_post_stop(id):
         data.status = 2
         result = Posts.change_status(data)
         return jsonify(result)
-
