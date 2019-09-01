@@ -5,7 +5,7 @@
 import json
 from .Base import db
 from .Posts import Posts  # 关系表，分文件存储表时，需要 import
-from flask import jsonify
+from flask import jsonify, url_for
 
 
 class Category(db.Model):
@@ -48,11 +48,14 @@ class Category(db.Model):
 
     @classmethod
     def toLayer(cls):
+        """
+        这段代码是为zTree的数据结构设计的，根据ztree 的结构，将其设计为{}格式，这里卡了好久，但是是值得的，拥有解困能力 才是更重要的，善于分析
+        :return:json数据
+        """
         # category = [[i.id, i.pid, i.name, i.title] for i in cls.query.all()]
-        category = [{'id': i.id, 'pid': i.pid, 'name': i.name, 'title': i.title} for i in cls.query.all()]
-        # json_data = jsonify(category[0])
-        # for item in category:
-        #     json_data.append(jsonify(item))
+        category = [{'id': i.id, 'pid': i.pid, 'name': i.name, 'title': i.title,
+                     'url': url_for('admin.admin_post_category_list', category_id=i.id), 'target': '_self'} for i in
+                    cls.query.all()]
         return category
 
     @classmethod
