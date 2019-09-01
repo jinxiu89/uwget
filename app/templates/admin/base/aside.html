@@ -25,16 +25,6 @@
                 </ul>
             </dd>
         </dl>
-        {#        <dl id="menu-comments" class="Hui-menu">#}
-        {#            <dt class="Hui-menu-title"><i class="Hui-iconfont">&#xe622;</i> 评论管理<i#}
-        {#                    class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>#}
-        {#            <dd class="Hui-menu-item">#}
-        {#                <ul>#}
-        {#                    <li><a href="comment-list.html" title="评论列表">评论列表</a></li>#}
-        {#                    <li><a href="feedback-list.html" title="意见反馈">意见反馈</a></li>#}
-        {#                </ul>#}
-        {#            </dd>#}
-        {#        </dl>#}
         <dl id="menu-system" class="Hui-menu">
             <dt class="Hui-menu-title"><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i
                     class="Hui-iconfont Hui-admin-menu-dropdown-arrow">&#xe6d5;</i></dt>
@@ -50,7 +40,7 @@
                             <dd class="Hui-menu-item manager-item">
                                 <ul>
                                     <li class="permission_group"><a href="{{ url_for('admin.admin_permission_group') }}" title="权限管理">权限组</a></li>
-                                    <li><a href="admin-permission.html" title="权限管理">权限管理</a></li>
+                                    <li class="permission"><a href="{{ url_for('admin.admin_permission') }}" title="权限管理">权限管理</a></li>
                                     <li><a href="admin-role.html" title="角色管理">角色管理</a></li>
 
                                     <li><a href="admin-list.html" title="管理员列表">管理员列表</a></li>

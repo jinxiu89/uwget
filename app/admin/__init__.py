@@ -8,7 +8,7 @@ admin = Blueprint('admin', __name__, url_prefix='/admin')
 from .index.dashboard import *
 from .content.category import *
 from .content.posts import *
-from .system import (language, permissionGroup)
+from .system import (language, permissionGroup, permission)
 from .context import *
 from .filter import *
 from .decorate import *

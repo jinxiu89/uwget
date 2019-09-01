@@ -18,3 +18,4 @@ class Permission(db.Model):
         data = {"name": self.name, "code": self.code}
         return '{}'.format(data)
 
+

@@ -27,3 +27,8 @@ class PermissionGroup(db.Model):
     @classmethod
     def by_id(cls, id):
         return db.session.query(cls).filter_by(id=id).first()
+
+    @classmethod
+    def choices(cls):
+        category = [(i.id, i.name) for i in cls.query.all()]
+        return category

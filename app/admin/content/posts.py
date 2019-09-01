@@ -20,8 +20,6 @@ def admin_posts_list():
 
 @admin.route('/posts/category/<int:category_id>', methods=['GET'])
 def admin_post_category_list(category_id):
-    category = Category.toLayer()
-    print(category)
     data, count = Posts.by_category(category_id)
     return render_template('admin/posts/index.html', data=data, count=count)
 
