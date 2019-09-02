@@ -18,4 +18,13 @@ class Permission(db.Model):
         data = {"name": self.name, "code": self.code}
         return '{}'.format(data)
 
+    @classmethod
+    def all(cls):
+        query = db.session.query(cls)
+        data = query.order_by(cls.id.asc()).all()
+        count = query.count()
+        return data, count
 
+    @classmethod
+    def by_id(cls, id):
+        return db.session.query(cls).filter_by(id=id).first()

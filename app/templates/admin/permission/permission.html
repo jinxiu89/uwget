@@ -39,7 +39,8 @@
                         <thead>
                         <tr class="text-c">
                             <th width=6%>ID</th>
-                            <th>组名</th>
+                            <th>权限名称</th>
+                            <th>权限CODE</th>
                             <th width=6%>操作</th>
                         </tr>
                         </thead>
@@ -48,9 +49,10 @@
                             <tr class="text-c va-m">
                                 <td>{{ item.id }}</td>
                                 <td class="text-l">{{ item.name }}</td>
+                                <td class="text-l">{{ item.code }}</td>
                                 <td class="td-manage text-l">
                                     <a class="btn btn-primary size-MINI"
-                                       onClick="layer_show('编辑组','{{ url_for('admin.admin_permissionGroup_edit',id=item.id) }}','','350')"
+                                       onClick="layer_show('编辑权限','{{ url_for('admin.admin_permission_edit',id=item.id) }}','','350')"
                                        href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
                                     </a>
                                 </td>

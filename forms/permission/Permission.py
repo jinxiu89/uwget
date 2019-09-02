@@ -40,3 +40,15 @@ class PermissionForm(FlaskForm):
         except Exception as e:
             db.session.rollback()
             return {'status': False, 'message': str(e)}
+
+    def update(self, data):
+        data.name = self.name.data
+        data.group_id = self.group_id.data
+        data.code = self.code.data
+        data.update_time = int(time.time())
+        try:
+            db.session.add(data)
+            db.session.commit()
+            return {'status': True, 'message': '保存成功'}
+        except Exception as e:
+            return {'status': False, 'message': str(e)}
