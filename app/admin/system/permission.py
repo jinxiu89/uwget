@@ -20,5 +20,10 @@ def admin_permission_add():
     form.group_id.choices = PermissionGroup.choices()
     if request.method == 'GET':
         return render_template('admin/permission/add_permission.html', form=form)
-
-
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            result = form.create()
+            return jsonify(result)
+        else:
+            error = packing_error(form.errors)
+            return jsonify({'status': False, 'message': str(error)})

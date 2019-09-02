@@ -8,7 +8,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, RadioField, TextAreaField, SelectField, IntegerField
 from wtforms.validators import DataRequired, length
 from app.modules.Base import db
-from app.modules.PermissionGroup import PermissionGroup as Model
+from app.modules.Permission import Permission as Model
 
 
 class PermissionForm(FlaskForm):
@@ -26,3 +26,17 @@ class PermissionForm(FlaskForm):
         super(PermissionForm, self).__init__(*args, **kwargs)
 
     submit = SubmitField(render_kw={"class": "button btn btn-primary radius size-L", 'type': 'button', "value": "提交"})
+
+    def create(self):
+        data = Model(
+            group_id=self.group_id.data,
+            name=self.name.data,
+            code=self.code.data,
+        )
+        try:
+            db.session.add(data)
+            db.session.commit()
+            return {'status': True, 'message': "创建成功"}
+        except Exception as e:
+            db.session.rollback()
+            return {'status': False, 'message': str(e)}

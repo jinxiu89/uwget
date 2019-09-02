@@ -51,7 +51,7 @@
                     postData[this.name] = this.value
                 });
                 $.ajax({
-                    url: "{{ url_for('admin.admin_permission_add',group_id=2) }}",
+                    url: "{{ url_for('admin.admin_permission_add') }}",
                     type: "POST",
                     data: postData,
                     'success': function (result) {
