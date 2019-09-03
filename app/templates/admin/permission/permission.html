@@ -13,11 +13,13 @@
     <div class="pos-a"
          style="width:150px;left:0;top:0; margin-top: 60px; bottom:0; height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5">
         <dl>
-            <dt style="padding-left: 24px;line-height: 30px;background: #1890ff;color: rgba(255,255,255,1)">权限分类</dt>
+            <dt style="padding-left: 24px;line-height: 40px;background: #1890ff;color: rgba(255,255,255,1)">权限分类</dt>
             <dd>
-                <ul id="ztree" class="ztree" style="padding-top: 10px">
+                <ul id="ztree" class="ztree">
                     {% for item in permission_group %}
-                        <li style="line-height: 25px"><a href="{{ url_for('admin.admin_permission') }}" style="padding-left: 24px">{{ item.name }}</a></li>
+                        <li class="group_{{ item.id }}" style="line-height: 40px;border-bottom: 1px solid #ddd;"><a
+                                href="{{ url_for('admin.admin_permission_list',group_id=item.id) }}"
+                                style="padding-left: 24px">{{ item.name }}</a></li>
                     {% endfor %}
                 </ul>
             </dd>
@@ -28,9 +30,13 @@
             <div class="panel-body">
                 <div class="clearfix">
 							<span class="f-l">
-								<a class="btn btn-primary radius"
-                                   onclick="layer_show('添加权限','{{ url_for("admin.admin_permission_add") }}','','350')"
-                                   href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i> 添加权限</a>
+								{% if not group_id %}
+
+                                {% else %}
+                                    <a class="btn btn-primary radius"
+                                       onclick="layer_show('添加权限','{{ url_for("admin.admin_permission_add",group_id=group_id) }}','','350')"
+                                       href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i> 添加权限</a>
+                                {% endif %}
 							</span>
                     <span class="f-r">共有数据：<strong>{{ count }}</strong> 条</span>
                 </div>
@@ -75,6 +81,12 @@
             $("#menu-system .level-top").css("display", "block");
             $("#menu-system .manager-item").css("display", "block");
             $("#menu-system .manager-item .permission").addClass("current");
+            var current_gid = ".group_" + '{{ group_id }}';
+
+            $(current_gid).find("a").css({
+                color: "#06C",
+                textDecoration: "underline"
+            });
         });
 
         function change_status(url) {

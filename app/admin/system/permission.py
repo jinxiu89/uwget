@@ -16,11 +16,19 @@ def admin_permission():
     return render_template('admin/permission/permission.html', data=data, count=count)
 
 
-@admin.route('/permission/add', methods=['GET', 'POST'])
-def admin_permission_add():
+@admin.route('/permission/group/<int:group_id>', methods=['GET', 'POST'])
+def admin_permission_list(group_id):
+    data, count = Permission.by_groupId(group_id)
+    return render_template('admin/permission/permission.html', data=data, count=count, group_id=group_id)
+
+
+@admin.route('/permission/<int:group_id>/add', methods=['GET', 'POST'])
+def admin_permission_add(group_id=None):
     form = PermissionForm()
     form.group_id.choices = PermissionGroup.choices()
     if request.method == 'GET':
+        if group_id is not None:
+            form.group_id.data = group_id
         return render_template('admin/permission/add_permission.html', form=form)
     if request.method == 'POST':
         if form.validate_on_submit():

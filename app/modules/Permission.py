@@ -28,3 +28,10 @@ class Permission(db.Model):
     @classmethod
     def by_id(cls, id):
         return db.session.query(cls).filter_by(id=id).first()
+
+    @classmethod
+    def by_groupId(cls, group_id):
+        query = db.session.query(cls).filter_by(group_id=group_id)
+        data = query.all()
+        count = query.count()
+        return data, count
