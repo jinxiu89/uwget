@@ -1,0 +1,82 @@
+{% extends "admin/base/index.html" %}
+{% block title %}Post分类管理{% endblock %}
+{% block navbar %}
+    <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px">
+        首页
+        <span class="c-gray en">/</span>
+        角色
+        <span class="c-gray en">/</span>
+        列表
+    </nav>
+{% endblock %}
+{% block main %}
+    <div style="padding: 20px;">
+        <div class="panel mt-20">
+            <div class="panel-body">
+                <div class="clearfix">
+							<span class="f-l">
+								<a class="btn btn-primary radius"
+                                   onclick="layer_show('添加组','{{ url_for("admin.admin_permissionGroup_add") }}','','350')"
+                                   href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i> 添加组</a>
+							</span>
+                    <span class="f-r">共有数据：<strong>{{ count }}</strong> 条</span>
+                </div>
+                <div class="mt-20 clearfix">
+                    <table class="table table-border table-bordered table-bg table-hover table-sort">
+                        <thead>
+                        <tr class="text-c">
+                            <th width=6%>ID</th>
+                            <th>组名</th>
+                            <th width=6%>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in data %}
+                            <tr class="text-c va-m">
+                                <td>{{ item.id }}</td>
+                                <td class="text-l">{{ item.name }}</td>
+                                <td class="td-manage text-l">
+                                    <a class="btn btn-primary size-MINI"
+                                       onClick="layer_show('编辑组','{{ url_for('admin.admin_permissionGroup_edit',id=item.id) }}','','350')"
+                                       href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <!--请在下方写此页面业务相关的脚本-->
+    <script type="text/javascript" src="{{ url_for('static',filename="admin/libs/laypage/1.2/laypage.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename="admin/business/js/main.js") }}"></script>
+    <script>
+        $(function () {
+            $("#menu-system .manager-title").addClass("selected");
+            $("#menu-system .level-top").css("display", "block");
+            $("#menu-system .manager-item").css("display", "block");
+            $("#menu-system .manager-item .role").addClass("current");
+        });
+
+        function change_status(url) {
+            $.ajax({
+                type: "get",
+                url: url,
+                dataType: "json",
+                success: function (result) {
+                    if (result.status === true) {
+                        layer.msg(result.message, {'icon': 1, 'time': 500}, function () {
+                            window.location.replace(location.href)
+                        })
+                    } else {
+                        layer.msg(result.message, {'icon': 5, 'time': 6000})
+                    }
+                }
+            })
+        }
+    </script>
+{% endblock %}

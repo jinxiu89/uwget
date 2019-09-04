@@ -4,6 +4,7 @@
 # create by thomas on 2019/8/28.
 import time
 from .Base import db
+from .Relationship import role_permission
 
 
 class Permission(db.Model):
@@ -13,6 +14,8 @@ class Permission(db.Model):
     code = db.Column(db.String(32), comment="权限码")
     create_time = db.Column(db.Integer, default=int(time.time()), comment="创建时间")
     update_time = db.Column(db.Integer, default=int(time.time()), comment="更新时间")
+    roles = db.relationship('Roles', secondary=role_permission, lazy='subquery',
+                            backref=db.backref('Permission', lazy=True))
 
     def __repr__(self):
         data = {"name": self.name, "code": self.code}
