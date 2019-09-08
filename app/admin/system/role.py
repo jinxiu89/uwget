@@ -5,6 +5,7 @@
 from app.admin import admin
 from flask import render_template, request, jsonify, session
 from app.modules.Roles import Roles
+from app.modules.PermissionGroup import PermissionGroup as Group
 from utils.admin.common import packing_error
 from forms.permission.Role import RoleForm
 
@@ -44,3 +45,9 @@ def admin_permission_role_edit(id):
         else:
             error = packing_error(form.errors)
             return jsonify({'status': False, 'message': str(error)})
+
+
+@admin.route('/permission/role/setting/<int:id>', methods=['GET', 'POST'])
+def admin_set_permission(id):
+    permission = Group.with_permission()
+    return 'hello'

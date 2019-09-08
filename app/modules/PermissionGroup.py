@@ -25,6 +25,12 @@ class PermissionGroup(db.Model):
         return data, count
 
     @classmethod
+    def with_permission(cls):
+        query = db.session.query(cls)
+        data = query.all()
+        return data
+
+    @classmethod
     def by_id(cls, id):
         return db.session.query(cls).filter_by(id=id).first()
 
