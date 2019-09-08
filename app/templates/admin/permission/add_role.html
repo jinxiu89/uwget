@@ -1,0 +1,56 @@
+{% extends "admin/base/form.html" %}
+{% block form %}
+    <form action="" method="post" class="form form-horizontal" id="form-admin-add">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2" id="name"><span
+                    class="c-red">*</span>{{ form.name.label }}：</label>
+            <div class="form-controls col-xs-8 col-sm-6">
+                {{ form.name }}
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {{ form.csrf_token }}
+                {{ form.submit }}
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript"
+            src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/jquery.validate.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/validate-methods.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for('static',filename="admin/libs/jquery.validation/1.14.0/messages_zh.js") }}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".description-textarea").Huitextarealength({
+                minlength: 10,
+                maxlength: 255
+            });
+            /* 表单验证，提交 */
+            $(".button").click(function () {
+                var postData = {};
+                var data = $("form").serializeArray();
+                $.each(data, function () {
+                    postData[this.name] = this.value
+                });
+                $.ajax({
+                    url: "{{ url_for('admin.admin_permission_role_add') }}",
+                    type: "POST",
+                    data: postData,
+                    'success': function (result) {
+                        if (result.status === true) {
+                            layer.msg(result.message, {'icon': 1, 'time': 2000}, function () {
+                                window.parent.location.reload();
+                            })
+                        } else {
+                            layer.msg(result.message, {'icon': 5, 'time': 100000})
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
