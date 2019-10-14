@@ -4,11 +4,13 @@
 # create by thomas on 2019/10/14.
 from app.frontend import frontend
 from flask import render_template
+from app.modules.Posts import Posts
 
 
 @frontend.route('/', methods=['GET'])
 def frontend_index():
-    return render_template('frontend/home/index.html')
+    data, count = Posts.all()
+    return render_template('frontend/home/index.html', data=data, count=count)
 
 
 @frontend.route('/index', methods=['GET'])

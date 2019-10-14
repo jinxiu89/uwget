@@ -14,6 +14,6 @@ def category():
     return dict(category=Category.by_status())
 
 
-@frontend.context_processor
-def hot():
-    pass
+# @frontend.context_processor
+# def hot():
+#     pass
