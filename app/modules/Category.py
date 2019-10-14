@@ -41,6 +41,10 @@ class Category(db.Model):
         return data, count
 
     @classmethod
+    def by_status(cls):
+        return cls.query.filter_by(status=1).all()
+
+    @classmethod
     def choices(cls):
         category = [(i.id, i.name) for i in cls.query.all()]
         category.insert(0, (0, "根分类"))
@@ -52,7 +56,6 @@ class Category(db.Model):
         这段代码是为zTree的数据结构设计的，根据ztree 的结构，将其设计为{}格式，这里卡了好久，但是是值得的，拥有解困能力 才是更重要的，善于分析
         :return:json数据
         """
-        # category = [[i.id, i.pid, i.name, i.title] for i in cls.query.all()]
         category = [{'id': i.id, 'pid': i.pid, 'name': i.name, 'title': i.title,
                      'url': url_for('admin.admin_post_category_list', category_id=i.id), 'target': '_self'} for i in
                     cls.query.all()]

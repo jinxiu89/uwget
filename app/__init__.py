@@ -9,6 +9,7 @@ from config import config
 from app.admin import admin
 from app.user import user
 from app.user.auth import Github
+from app.frontend import frontend
 
 csrf = CSRFProtect()
 
@@ -25,6 +26,7 @@ def create_app(deploy):
     Github.init_app(app)
     app.register_blueprint(user)
     app.register_blueprint(admin)
+    app.register_blueprint(frontend)
 
     @app.errorhandler(CSRFError)
     def csrf_error(reason):

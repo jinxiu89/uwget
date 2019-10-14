@@ -5,6 +5,9 @@
 from app.admin import admin
 from flask import render_template
 
+@admin.route('/', methods=['GET'])
+def admin1_dashboard():
+    return render_template("/admin/dashboard.html")
 
 @admin.route('/dashboard', methods=['GET'])
 def admin_dashboard():
