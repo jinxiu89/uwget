@@ -4,6 +4,7 @@
 # create by thomas on 2019/8/20.
 import uuid
 import time
+from datetime import datetime
 from flask_wtf import FlaskForm
 from flask import session
 from wtforms import StringField, SubmitField, RadioField, TextAreaField, SelectField, IntegerField
@@ -99,7 +100,7 @@ class Form(FlaskForm):
             data.markdown = self.markdown.data
             data.markdown_html_code = self.markdown_html_code.data
             data.references = self.references.data
-            data.update_time = int(time.time())
+            data.update_time = datetime.utcnow()
             db.session.add(data)
             db.session.commit()
             return {'status': True, 'message': "保存成功"}

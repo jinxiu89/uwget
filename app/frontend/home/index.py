@@ -15,4 +15,5 @@ def frontend_index():
 
 @frontend.route('/index', methods=['GET'])
 def frontend_index_():
-    return render_template('frontend/home/index.html')
+    data, count = Posts.all()
+    return render_template('frontend/home/index.html', data=data, count=count)

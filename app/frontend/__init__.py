@@ -9,4 +9,4 @@ from .context import *
 from .filter import *
 from .decorate import *
 from .home.index import *
-from .post import *
+from .post.details import *
