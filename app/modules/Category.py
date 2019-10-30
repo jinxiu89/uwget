@@ -80,6 +80,10 @@ class Category(db.Model):
         return db.session.query(cls).filter_by(name=name).first()
 
     @classmethod
+    def by_category_title(cls, title):
+        return db.session.query(cls).filter_by(title=title).first()
+
+    @classmethod
     def change_status(cls, category):
         try:
             db.session.add(category)

@@ -4,6 +4,7 @@
 # create by thomas on 2019/10/14.
 from app.frontend import frontend
 from app.modules.Category import Category
+from app.modules.Posts import Posts
 
 
 @frontend.app_template_filter('getTags')
@@ -29,3 +30,25 @@ def get_category_name(id):
     """
     data = Category.by_id(id)
     return data.name
+
+
+@frontend.app_template_filter('getCategoryTitle')
+def get_category_title(id):
+    data = Category.by_id(id)
+    return data.title
+
+
+@frontend.app_template_filter('prevPost')
+def prev_post(id):
+    data = Posts.by_id(id - 1)
+    if data is not None:
+        return "<a href=\"/post/{}.html\" target=\"_blank\">{}</a>".format(data.title, data.name)
+    return "无"
+
+
+@frontend.app_template_filter('nextPost')
+def next_post(id):
+    data = Posts.by_id(id + 1)
+    if data is not None:
+        return "<a href=\"/post/{}.html\" target=\"_blank\">{}</a>".format(data.title, data.name)
+    return "无"

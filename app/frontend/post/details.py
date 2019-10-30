@@ -7,7 +7,7 @@ from flask import render_template
 from app.modules.Posts import Posts
 
 
-@frontend.route('/post/<string:title>/', methods=['GET'])
+@frontend.route('/post/<string:title>.html', methods=['GET'])
 def frontend_post_details(title):
     result = Posts.by_title(title)
     return render_template('frontend/post/details.html', result=result)

@@ -10,3 +10,5 @@ from .filter import *
 from .decorate import *
 from .home.index import *
 from .post.details import *
+from .post.lists import *
+
