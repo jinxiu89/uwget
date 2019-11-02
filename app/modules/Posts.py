@@ -70,3 +70,11 @@ class Posts(db.Model):
         data = query.order_by(cls.id.asc()).all()
         count = query.count()
         return data, count
+
+    @classmethod
+    def get_hot(cls, marked):
+        return db.session.query(cls).filter_by(marked=marked).order_by(cls.create_time.desc()).limit(8).all()
+
+    @classmethod
+    def new_post(cls):
+        return db.session.query(cls).order_by(cls.create_time.desc()).limit(8).all()

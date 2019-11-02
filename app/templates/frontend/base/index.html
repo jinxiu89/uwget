@@ -285,14 +285,18 @@
                         <h4>最新文章</h4>
                         <hr>
                         <ul class="list-unstyled">
-{#                            <li><a href="#">linux 最大的几个发行版</a></li>#}
+                            {% for item in new_post %}
+                            <li><a href="{{ url_for('frontend.frontend_post_details',title=item.title) }}">{{ item.name }}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="main-item" style="min-height: 640px">
                         <h4>本人推荐</h4>
                         <hr>
                         <ul class="list-unstyled">
-{#                            <li><a href="#">linux 最大的几个发行版</a></li>#}
+                            {% for item in hot %}
+                            <li><a href="{{ url_for('frontend.frontend_post_details',title=item.title) }}">{{ item.name }}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>

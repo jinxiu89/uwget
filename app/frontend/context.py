@@ -4,6 +4,7 @@
 # create by thomas on 2019/10/14.
 from app.frontend import frontend
 from app.modules.Category import Category
+from app.modules.Posts import Posts
 
 
 @frontend.context_processor
@@ -14,6 +15,11 @@ def category():
     return dict(category=Category.by_status())
 
 
-# @frontend.context_processor
-# def hot():
-#     pass
+@frontend.context_processor
+def hot():
+    return dict(hot=Posts.get_hot(1))
+
+
+@frontend.context_processor
+def new_post():
+    return dict(new_post=Posts.new_post())

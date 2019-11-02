@@ -31,7 +31,8 @@
                     </div>
                 {% endif %}
                 <div class="media-body">
-                    <h3><a href="{{ url_for('frontend.frontend_post_details',title=item.title) }}">{{ item.name }}</a></h3>
+                    <h3><a href="{{ url_for('frontend.frontend_post_details',title=item.title) }}">{{ item.name }}</a>
+                    </h3>
                     <span class="pull-left"><i class="iconfont">&#xe72b;</i></span>
                     <ul class="list-inline">
                         {{ item.keywords|getTags|safe }}
@@ -46,7 +47,8 @@
                 </div>
                 <div class="pull-left">
                     <ul class="list-inline">
-                        <li style="line-height: 34px"><i class="iconfont">&#xe60b; </i> 发布于 {{ moment(item.create_time).fromNow(refresh=True) }}</li>
+                        <li style="line-height: 34px"><i class="iconfont">&#xe60b; </i>
+                            发布于 {{ moment(item.create_time).fromNow(refresh=True) }}</li>
                         <li style="line-height: 34px"><i class="iconfont">&#xe6e6; </i><span>邱锦</span></li>
                         <li style="line-height: 34px"><i class="iconfont">&#xe719; </i><span><a
                                 href="{{ url_for('frontend.frontend_post_list',title=item.category_id|getCategoryTitle) }}">{{ item.category_id|getCategoryName }}</a></span>
@@ -57,46 +59,6 @@
                 <div class="clearfix"></div>
             </div>
         {% endfor %}
-    </div>
-{% endblock %}
-{% block aside %}
-    <div class="col-xs-12 col-sm-3">
-        <div class="main-item" style="min-height: 320px">
-            <div class="banner-info">
-                <span>个人信息</span>
-                <hr>
-                <div style="width: 140px;margin: 10px"><img
-                        src="http://img.guohongfu.top/20190829154149.jpg"
-                        alt="..."
-                        class="img-circle img-responsive center center-block"
-                        style="width: 95px"></div>
-                <dl class="">
-                    <dt>职业:</dt>
-                    <dd>后端工程师</dd>
-                    <dt>使用工具:</dt>
-                    <dd>Python/Php/Bootstrap</dd>
-                    <dt>现居:</dt>
-                    <dd>深圳北</dd>
-                </dl>
-                <hr>
-                <span><i class="iconfont">&#xe6f5;</i></span>
-            </div>
-        </div>
-        <div class="main-item" style="min-height: 320px">
-            <h4>最新文章</h4>
-            <hr>
-            <ul class="list-unstyled">
-{#                <li><a href="#">linux 最大的几个发行版</a></li>#}
-            </ul>
-        </div>
-        <div class="main-item" style="min-height: 640px">
-            <h4>本人推荐</h4>
-            <hr>
-            <ul class="list-unstyled">
-{#                <li><a href="#">linux 最大的几个发行版</a></li>#}
-
-            </ul>
-        </div>
     </div>
 {% endblock %}
 
