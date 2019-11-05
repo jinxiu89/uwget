@@ -3,7 +3,6 @@
 # author:jinxiu89@163.com
 # create by thomas on 2019/8/20.
 import uuid
-import time
 from datetime import datetime
 from flask_wtf import FlaskForm
 from flask import session
@@ -63,7 +62,7 @@ class Form(FlaskForm):
     def create(self):
         result = Posts(
             category_id=self.category_id.data,
-            title=uuid.uuid4().hex,
+            title='p'+uuid.uuid4().hex[0:16:2],
             uuid=eval(session.get("user"))['uuid'],
             name=self.name.data,
             subtitle=self.subtitle.data,
@@ -74,7 +73,7 @@ class Form(FlaskForm):
             markdown=self.markdown.data,
             markdown_html_code=self.markdown_html_code.data,
             references=self.references.data,
-            create_time=int(time.time()),
+            create_time=datetime.utcnow(),
         )
         try:
             db.session.add(result)

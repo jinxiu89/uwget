@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{ url_for("static",filename="admin/libs/editormd/css/editormd.css") }}">
 {% endblock %}
 {% block form %}
-    <form action="" method="post" class="form form-horizontal" id="form-admin-add">
+    <form action="" method="post" class="form form-horizontal" id="form-admin-add" enctype="multipart/form-data">
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-1">
                 <span class="c-red">*</span>{{ form.category_id.label }}：
@@ -119,7 +119,6 @@
                 });
                 postData['markdown_html_code'] = postData['markdown-html-code'];
                 delete postData['markdown-html-code'];
-                console.log(postData);
                 $.ajax({
                     url: "{{ url_for('admin.admin_post_add') }}",
                     type: "POST",
@@ -153,7 +152,7 @@
                 //image upload
                 imageUpload: true,
                 imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                {#imageUploadURL: ""#}
+                imageUploadURL: "{{ url_for('markdown_upload') }}",
             });
         });
     </script>

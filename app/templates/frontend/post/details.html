@@ -48,6 +48,12 @@
                 <div id="test-editormd-view" class="markdown-body editormd-html-preview">
                     {{ result.markdown_html_code|safe }}
                 </div>
+                <hr>
+                <div>
+                    <span>参考文献</span>
+                    <br>
+                    {{ result.references|safe }}
+                </div>
             </div>
         </div>
         <div class="main-item">
@@ -58,7 +64,7 @@
         <div class="main-item">
             <h2 class="main-title"><span>相关文章</span></h2>
             <ul class="article-list">
-{#                <li><a href="#">a;skdfj;askdjf;aksjda</a></li>#}
+                {#                <li><a href="#">a;skdfj;askdjf;aksjda</a></li>#}
             </ul>
         </div>
         <div class="main-item">
@@ -68,4 +74,9 @@
             <h2 class="main-title"><span>评论列表</span></h2>
         </div>
     </div>
+{% endblock %}
+{% block script %}
+    <script>
+        $("p img").addClass("img-responsive");
+    </script>
 {% endblock %}

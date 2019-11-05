@@ -3,7 +3,7 @@
 # author:jinxiu89@163.com
 # create by thomas on 2019/8/11.
 import uuid
-import time
+from datetime import datetime
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, RadioField, TextAreaField, SelectField, IntegerField
 from wtforms.validators import DataRequired, length
@@ -51,12 +51,12 @@ class Form(FlaskForm):
         result = Category(
             pid=self.pid.data,
             name=self.name.data,
-            title=uuid.uuid4().hex,
+            title='c'+uuid.uuid4().hex[0:16:2],
             keywords=self.keywords.data,
             sort=self.sort.data,
             status=self.status.data,
             description=self.description.data,
-            create_time=int(time.time())
+            create_time=datetime.utcnow()
         )
         try:
             db.session.add(result)
@@ -78,6 +78,7 @@ class Form(FlaskForm):
             category.sort = self.sort.data
             category.status = self.status.data
             category.description = self.description.data
+            category.update_time = datetime.utcnow()
             db.session.add(category)
             db.session.commit()
             return {'status': True, 'message': "保存成功"}

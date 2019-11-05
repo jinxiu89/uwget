@@ -25,6 +25,7 @@
 	<script>DD_belatedPNG.fix('*');</script><![endif]-->
     <!--/meta 作为公共模版分离出去-->
     <title>{% block title %}{% endblock %}- h-ui.admin.pro v1.0</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     {% block seo %}
     {% endblock %}
     {% block style %}{% endblock %}

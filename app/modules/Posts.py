@@ -36,7 +36,7 @@ class Posts(db.Model):
     @classmethod
     def all(cls):
         query = db.session.query(cls)
-        data = query.order_by(cls.id.asc(), cls.clicks.desc()).all()
+        data = query.order_by(cls.create_time.desc(), cls.id.asc(), cls.clicks.desc()).all()
         count = query.count()
         return data, count
 
