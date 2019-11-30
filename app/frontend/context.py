@@ -5,6 +5,7 @@
 from app.frontend import frontend
 from app.modules.Category import Category
 from app.modules.Posts import Posts
+from utils.category import to_level
 
 
 @frontend.context_processor
@@ -12,7 +13,8 @@ def category():
     """
     导航的分类
     """
-    return dict(category=Category.by_status())
+    tree = Category.buildTree()
+    return dict(tree=tree)
 
 
 @frontend.context_processor

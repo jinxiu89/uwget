@@ -1,17 +1,15 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8_*_
 # author:jinxiu89@163.com
-# create by thomas on 2019/5/28.
-from flask_script import Manager
-from flask_migrate import Migrate, MigrateCommand
+# create by thomas on 2019/11/25.
+from werkzeug.contrib.fixers import ProxyFix
+
 from app import create_app
-from app.modules.Base import db
 from app.modules import (UserAuths, UserBase, Category, Posts, Language, PermissionGroup, Permission, Roles, \
                          Relationship)
+from app.modules.Base import db
 
 app = create_app('default')
-migrate = Migrate(app, db)
-manger = Manager(app)
-manger.add_command("db", MigrateCommand)
+db.init_app(app)
 if __name__ == '__main__':
-    manger.run()
+    app.run()

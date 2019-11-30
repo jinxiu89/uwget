@@ -12,7 +12,6 @@ class UserBase(db.Model):
     uuid = db.Column(db.String(64), unique=True)
     username = db.Column(db.String(64), comment='用户名')  # name
     avatar_url = db.Column(db.String(255))
-    password = db.Column(db.String(255), comment='密码')
     email = db.Column(db.String(64), comment='邮箱')
     phone = db.Column(db.String(11), comment='手机')
     name = db.Column(db.String(64), comment='真实姓名')

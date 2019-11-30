@@ -6,6 +6,7 @@ import json
 from .Base import db
 from .Posts import Posts  # 关系表，分文件存储表时，需要 import
 from flask import jsonify, url_for
+from utils.category import to_level
 
 
 class Category(db.Model):
@@ -16,6 +17,7 @@ class Category(db.Model):
     keywords = db.Column(db.String(128), comment="分类关键词")
     sort = db.Column(db.Integer, comment="列表排序")
     status = db.Column(db.SmallInteger, comment="状态")
+    path = db.Column(db.String(64), comment="用于查询出子分类的文章")
     description = db.Column(db.String(255), comment="分类描述")
     create_time = db.Column(db.Integer, comment="创建时间")
     posts = db.relationship("Posts", backref="category", lazy="dynamic")
@@ -60,6 +62,12 @@ class Category(db.Model):
                      'url': url_for('admin.admin_post_category_list', category_id=i.id), 'target': '_self'} for i in
                     cls.query.all()]
         return category
+
+    @classmethod
+    def buildTree(cls):
+        lists = [{'id': item.id, 'pid': item.pid, 'name': item.name, 'title': item.title} for item in
+                 cls.query.filter_by(status=1).all()]
+        return to_level(lists, 0, 0)
 
     @classmethod
     def by_id(cls, id):

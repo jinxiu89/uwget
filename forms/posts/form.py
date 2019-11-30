@@ -33,7 +33,7 @@ class Form(FlaskForm):
                             "class": "radio-box"
                         })
 
-    marked = RadioField(label="推荐", validators=[DataRequired("必须选择一个")], coerce=int, choices=((1, '推荐'), (2, '不推荐')),
+    marked = RadioField(label="推荐", validators=[DataRequired("推荐位必须选一个")], coerce=int, choices=((1, '推荐'), (2, '不推荐')),
                         render_kw={
                             "class": "radio-box"
                         })

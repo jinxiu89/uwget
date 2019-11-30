@@ -22,7 +22,7 @@ class Form(FlaskForm):
     })
     name = StringField(label="分类名", validators=[DataRequired('分类名必须输入')], description="分类名",
                        render_kw={"id": "name", "class": "input-text size-L", "placeholder": "分类名可以是话题名，技术栏目等"})
-    keywords = StringField(label="关键词", validators=[DataRequired('关键词必须填'), length(10, 64, "关键词不能超过64个字符")],
+    keywords = StringField(label="关键词", validators=[DataRequired('关键词必须填'), length(10, 64, "关键词不能超过64个字符和少于10个字符")],
                            description="关键词",
                            render_kw={"id": "keywords", "class": "input-text size-L",
                                       "placeholder": "关键词是seo的关键信息，请想好后添加，也可以先填一个，后期再修改"})
