@@ -7,7 +7,8 @@ from .UserAuths import UserAuth
 import json
 
 
-class UserBase(db.Model):
+class UserInfo(db.Model):
+    __tablename__ = 'user_info'
     id = db.Column(db.Integer, primary_key=True)
     uuid = db.Column(db.String(64), unique=True)
     username = db.Column(db.String(64), comment='用户名')  # name

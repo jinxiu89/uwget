@@ -8,7 +8,7 @@ from .Base import db
 
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    uuid = db.Column(db.String(64), db.ForeignKey("user_base.uuid"), comment="用户UUID，该文章属于那个用户")
+    uuid = db.Column(db.String(64), db.ForeignKey("user_info.uuid"), comment="用户UUID，该文章属于那个用户")
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"), comment="该文章属于哪个分类")
     name = db.Column(db.String(128), comment="文章标题")
     subtitle = db.Column(db.String(64), comment="副标题")

@@ -5,7 +5,7 @@
 from werkzeug.contrib.fixers import ProxyFix
 
 from app import create_app
-from app.modules import (UserAuths, UserBase, Category, Posts, Language, PermissionGroup, Permission, Roles, \
+from app.modules import (UserAuths, UserInfo, Category, Posts, Language, PermissionGroup, Permission, Roles, \
                          Relationship)
 from app.modules.Base import db
 

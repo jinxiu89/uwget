@@ -3,10 +3,11 @@
 # author:jinxiu89@163.com
 # create by thomas on 2019/6/23.
 from app.user import user
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for, jsonify
 from forms.user.login import LoginForm
 from forms.user.reg import RegForm
 from libs.redis import set_redis_data
+from utils.admin.common import packing_error
 
 
 @user.route('/login', methods=['GET', 'POST'])
@@ -17,8 +18,12 @@ def login():
         return render_template('user/login.html', form=form)
     if request.method == 'POST':
         if form.validate_on_submit():
-            data = form.data
-            print(data)
+            result = form.login()
+            result['next'] = '/admin/dashboard'
+            return jsonify(result)
+        else:
+            error = packing_error(form.errors)
+            return jsonify({'status': False, 'message': str(error)})
 
 
 @user.route('/reg', methods=['GET', 'POST'])
@@ -28,7 +33,12 @@ def reg():
         return render_template('user/reg.html', message="用户注册", form=form)
     if request.method == 'POST':
         if form.validate_on_submit():
-            data = form.data
+            result = form.create()
+            result['next'] = url_for('user.login')
+            return jsonify(result)
+        else:
+            error = packing_error(form.errors)
+            return jsonify({'status': False, 'message': str(error)})
 
 
 @user.route('/logout', methods=['GET', 'POST'])

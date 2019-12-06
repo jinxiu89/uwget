@@ -7,9 +7,9 @@ from .Base import db
 
 class UserAuth(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer, db.ForeignKey('user_base.id'))  # user base 表中的 id字段
+    uid = db.Column(db.Integer, db.ForeignKey('user_info.id'))  # user base 表中的 id字段
     third_type = db.Column(db.String(64))  # 三方登陆类型
-    access_token = db.Column(db.String(64))  # 令牌
+    access_token = db.Column(db.String(255))  # 令牌 密码
 
     def __repr__(self):
         return '<access_token %r>' % self.access_token

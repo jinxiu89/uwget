@@ -284,7 +284,7 @@
                     <div class="main-item" style="min-height: 320px">
                         <h4>最新文章</h4>
                         <hr>
-                        <ul class="list-unstyled">
+                        <ul>
                             {% for item in new_post %}
                             <li><a href="{{ url_for('frontend.frontend_post_details',title=item.title) }}">{{ item.name }}</a></li>
                             {% endfor %}
@@ -293,7 +293,7 @@
                     <div class="main-item" style="min-height: 640px">
                         <h4>本人推荐</h4>
                         <hr>
-                        <ul class="list-unstyled">
+                        <ul>
                             {% for item in hot %}
                             <li><a href="{{ url_for('frontend.frontend_post_details',title=item.title) }}">{{ item.name }}</a></li>
                             {% endfor %}

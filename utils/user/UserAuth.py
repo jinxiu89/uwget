@@ -3,17 +3,17 @@
 # author:jinxiu89@163.com
 # create by thomas on 2019/6/27.
 import json
-from app.modules.UserBase import UserBase
+from app.modules.UserInfo import UserInfo
 from app.modules.UserAuths import UserAuth as userAuth
 from app.modules.Base import db
 from flask import session
 
 
 def auth_github(response, access_token):
-    User = db.session.query(UserBase).filter(UserBase.uuid == response['id']).first()
+    User = db.session.query(UserInfo).filter(UserInfo.uuid == response['id']).first()
     if User is None:
         # 注册一个
-        User = UserBase(
+        User = UserInfo(
             uuid=response['id'],
             username=response['login'],
             email=response['email'],

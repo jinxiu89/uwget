@@ -109,6 +109,15 @@ body .iconfont {
   margin-bottom: 20px;
   background: #fff;
 }
+.banner .main-item ul,
+.main .main-item ul {
+  font-size: 12px;
+  padding-left: 15px;
+}
+.banner .main-item ul li,
+.main .main-item ul li {
+  line-height: 25px;
+}
 .banner .main-item ol,
 .main .main-item ol {
   padding-left: 15px;
@@ -126,6 +135,7 @@ body .iconfont {
 .banner .main-item .content,
 .main .main-item .content {
   padding-top: 10px;
+  line-height: 28px;
 }
 .banner .main-item .article-list,
 .main .main-item .article-list {
