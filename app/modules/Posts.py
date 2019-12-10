@@ -65,6 +65,13 @@ class Posts(db.Model):
         return data, count
 
     @classmethod
+    def by_categoryIds(cls, category_ids):
+        query = db.session.query(cls).filter(cls.category_id.in_(category_ids))
+        data = query.order_by(cls.id.asc()).all()
+        count = query.count()
+        return data, count
+
+    @classmethod
     def by_category_title(cls, title):
         query = db.session.query(cls).filter_by(title=title)
         data = query.order_by(cls.id.asc()).all()

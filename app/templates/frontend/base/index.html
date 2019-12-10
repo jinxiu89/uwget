@@ -260,7 +260,7 @@
             {% endblock %}
             {% block aside %}
                 <div class="col-xs-12 col-sm-3">
-                    <div class="main-item" style="min-height: 320px">
+                    <div class="main-item">
                         <div class="banner-info">
                             <span>个人信息</span>
                             <hr>
@@ -269,35 +269,43 @@
                                     alt="..."
                                     class="img-circle img-responsive center center-block"
                                     style="width: 95px"></div>
-                            <dl class="">
+                            <dl class="dl-horizontal">
                                 <dt>职业:</dt>
                                 <dd>后端工程师</dd>
-                                <dt>使用工具:</dt>
+                                <dt>工具:</dt>
                                 <dd>Python/Php/Bootstrap</dd>
                                 <dt>现居:</dt>
                                 <dd>深圳北</dd>
                             </dl>
                             <hr>
-                            <span><i class="iconfont">&#xe6f5;</i></span>
+                            <span>你的强大不在你能战胜多少人，而是有多少人不战而知你强过他。</span>
                         </div>
                     </div>
-                    <div class="main-item" style="min-height: 320px">
-                        <h4>最新文章</h4>
-                        <hr>
-                        <ul>
-                            {% for item in new_post %}
-                            <li><a href="{{ url_for('frontend.frontend_post_details',title=item.title) }}">{{ item.name }}</a></li>
-                            {% endfor %}
-                        </ul>
+                    <div class="main-item">
+                        <div class="hot_article">
+                            <h4>最新文章</h4>
+                            <hr>
+                            <ul>
+                                {% for item in new_post %}
+                                    <li>
+                                        <a href="{{ url_for('frontend.frontend_post_details',title=item.title) }}">{{ item.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
-                    <div class="main-item" style="min-height: 640px">
-                        <h4>本人推荐</h4>
-                        <hr>
-                        <ul>
-                            {% for item in hot %}
-                            <li><a href="{{ url_for('frontend.frontend_post_details',title=item.title) }}">{{ item.name }}</a></li>
-                            {% endfor %}
-                        </ul>
+                    <div class="main-item" >
+                        <div class="hot_article">
+                            <h4>本人推荐</h4>
+                            <hr>
+                            <ul>
+                                {% for item in hot %}
+                                    <li>
+                                        <a href="{{ url_for('frontend.frontend_post_details',title=item.title) }}">{{ item.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             {% endblock %}

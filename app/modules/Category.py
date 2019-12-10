@@ -17,6 +17,8 @@ class Category(db.Model):
     keywords = db.Column(db.String(128), comment="分类关键词")
     sort = db.Column(db.Integer, comment="列表排序")
     status = db.Column(db.SmallInteger, comment="状态")
+    level = db.Column(db.Integer, comment="分类级别")
+    is_directory = db.Column(db.Integer, comment="判断是否是父级，只要有下一级就是父级")
     path = db.Column(db.String(64), comment="用于查询出子分类的文章")
     description = db.Column(db.String(255), comment="分类描述")
     create_time = db.Column(db.Integer, comment="创建时间")
@@ -26,6 +28,8 @@ class Category(db.Model):
         data = {
             "id": self.id,
             "pid": self.pid,
+            "level": self.level,
+            "path": self.path,
             "name": self.name,
             "title": self.title
         }

@@ -48,10 +48,19 @@ class Form(FlaskForm):
         根新和新增为什么放在form里做呢？
         因为方便，符合flask-wtforms 的设计逻辑，理应如此
         """
+        if self.pid == 0:
+            level = 0
+            path = '-'
+        else:
+            parent = self.parent(self.pid.data)
+            level = parent.level + int(1)
+            path = parent.path + str(self.pid.data) + '-'
         result = Category(
             pid=self.pid.data,
             name=self.name.data,
-            title='c'+uuid.uuid4().hex[0:16:2],
+            path=path,
+            level=level,
+            title='c' + uuid.uuid4().hex[0:16:2],
             keywords=self.keywords.data,
             sort=self.sort.data,
             status=self.status.data,
@@ -71,9 +80,12 @@ class Form(FlaskForm):
         根新和新增为什么放在form里做呢？
         因为方便，符合flask-wtforms 的设计逻辑，理应如此
         """
+        parent = self.parent(self.pid.data)
         try:
             category.name = self.name.data
             category.pid = self.pid.data
+            category.path = parent.path + str(self.pid.data) + '-'
+            category.level = parent.level + int(1)
             category.keywords = self.keywords.data
             category.sort = self.sort.data
             category.status = self.status.data
@@ -84,4 +96,8 @@ class Form(FlaskForm):
             return {'status': True, 'message': "保存成功"}
         except Exception as e:
             db.session.rollback()
-            return {'status': False, 'message': str(e)}
+            return {'status': False, 'message': str(e) + '是这里吗'}
+
+    def parent(self, id):
+        category = Category.by_id(id)
+        return category

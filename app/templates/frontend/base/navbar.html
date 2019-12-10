@@ -17,7 +17,7 @@
             {% for item in tree %}
                 <ul class="nav navbar-nav ">
                 <li class="dropdown post">
-                    <a href="{{ url_for('frontend.frontend_post_list',title=item.title) }}" class="dropdown-toggle a-nav" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a href="{{ url_for('frontend.frontend_post_list',title=item.title) }}" class="dropdown-toggle {{ item.title }}" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">{{ item.name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         {% for i in item.child %}
@@ -26,7 +26,7 @@
                             </li>
                         {% endfor %}
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">所有的</a></li>
+                        <li><a href="{{ url_for('frontend.frontend_post_list',title=item.title) }}">所有的({{ item.name }})</a></li>
                     </ul>
                 </li>
             </ul>

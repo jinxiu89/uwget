@@ -94,20 +94,37 @@ body .iconfont {
 }
 .banner .banner-info,
 .main .banner-info {
-  padding: 30px 15px;
-  height: 60px;
   background: #fff;
-  min-height: 350px;
+  padding: 15px 0 15px 0;
 }
-.banner .banner-info dt,
-.main .banner-info dt {
+.banner .banner-info .dl-horizontal dd,
+.main .banner-info .dl-horizontal dd {
+  margin-left: 35px;
+}
+.banner .banner-info .dl-horizontal dt,
+.main .banner-info .dl-horizontal dt {
+  line-height: 22px;
   float: left;
+  width: 33px;
+  overflow: hidden;
+  clear: left;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .banner .main-item,
 .main .main-item {
-  padding: 20px;
+  padding: 0 15px;
   margin-bottom: 20px;
   background: #fff;
+}
+.banner .main-item .media-body h3,
+.main .main-item .media-body h3 {
+  margin-top: 15px;
+}
+.banner .main-item .hot_article,
+.main .main-item .hot_article {
+  padding: 15px 0 15px 0;
 }
 .banner .main-item ul,
 .main .main-item ul {

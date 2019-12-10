@@ -34,7 +34,7 @@ CREATE TABLE `alembic_version` (
 
 LOCK TABLES `alembic_version` WRITE;
 /*!40000 ALTER TABLE `alembic_version` DISABLE KEYS */;
-INSERT INTO `alembic_version` VALUES ('10a396e22467');
+INSERT INTO `alembic_version` VALUES ('2a07c67b5360');
 /*!40000 ALTER TABLE `alembic_version` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,6 +56,8 @@ CREATE TABLE `category` (
   `pid` int(11) DEFAULT NULL COMMENT '父分类ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `path` varchar(64) DEFAULT NULL COMMENT '用于查询出子分类的文章',
+  `level` int(11) DEFAULT NULL COMMENT '分类级别',
+  `is_directory` int(11) DEFAULT NULL COMMENT '判断是否是父级，只要有下一级就是父级',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -66,7 +68,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'WEB编成','ee20d687','PHP,thinkphp,php框架,PHP笔记',100,1,'PHP是我的第一语言，我定当努力总结归纳，我现在在作什么,PHP笔记PHP笔记',0,'2019-11-09 14:26:08',NULL),(2,'编程语言','85d51fce','pythonpythonpythonpython,',100,1,'pythonpythonpythonpythonpython',0,'2019-11-09 14:26:07',NULL),(3,'操作系统','e71b1a7b','linuxlinuxlinuxlinuxlinuxlinux',100,1,'linuxlinuxlinuxlinuxlinuxlinuxlinux',0,'2019-11-09 14:26:05',NULL),(4,'PHP笔记','21908ec5',' debian8 安装使用 shadowsocks-qt5',100,1,' debian8 安装使用 shadowsocks-qt5 debian8 安装使用 shadowsocks-qt5',1,'2019-11-09 14:26:00',NULL),(5,'Linux学习笔记','debd1e03','Linux学习笔记Linux学习笔记',100,1,'Linux学习笔记 Linux学习笔记Linux学习笔记Linux学习笔记',3,'2019-11-09 14:26:03',NULL),(6,'python笔记','5a979eb0','python笔记python笔记python笔记',100,1,'python笔记python笔记python笔记python笔记',2,'2019-11-10 14:25:51',NULL),(7,'社会科学','cac4f1f45','社会科学，自我励志，社',101,1,'社会科学，社会科学，社会科学',0,'2019-11-09 06:25:32',NULL),(8,'读后感','ce8c21844','学习技巧,学习方法，读书笔记',103,1,'综合各种读书的笔记，和自己的想法',7,'2019-11-09 06:27:57',NULL),(9,'网站运营','c1a35f84b','SEO思维，可落地的推广方案，日常的运营学习笔记',102,1,'技术是基础，运营是保障，不应该落下哪一部分，应该虚心受教，认真总结归纳并实践',0,'2019-11-09 06:38:05',NULL),(10,'SEO','c33b7f94e','系统SEO/SEM优化能力',101,1,'把学习过的SEO知识系统的总结归纳起来，本站建站初期可能SEO做的不好，后面认真总结实践',9,'2019-11-09 06:39:32',NULL),(11,'我的世界','cd0828c49','自我反省,自我提醒,把日常自我记录下来',103,1,'反过来告诫自己该做什么，不该做什么',7,'2019-11-10 03:47:37',NULL);
+INSERT INTO `category` VALUES (1,'WEB编程','ee20d687','PHP,thinkphp,php框架,PHP笔记',100,1,'PHP是我的第一语言，我定当努力总结归纳，我现在在作什么,PHP笔记PHP笔记',0,'2019-11-09 14:26:08','-',0,1),(2,'编程语言','85d51fce','pythonpythonpythonpython,',100,1,'pythonpythonpythonpythonpython',0,'2019-11-09 14:26:07','-',0,1),(3,'操作系统','e71b1a7b','linuxlinuxlinuxlinuxlinuxlinux',100,1,'linuxlinuxlinuxlinuxlinuxlinuxlinux',0,'2019-11-09 14:26:05','-',0,1),(4,'PHP笔记','21908ec5',' debian8 安装使用 shadowsocks-qt5',100,1,' debian8 安装使用 shadowsocks-qt5 debian8 安装使用 shadowsocks-qt5',1,'2019-11-09 14:26:00','-1-',1,0),(5,'Linux学习笔记','debd1e03','Linux学习笔记Linux学习笔记',100,1,'Linux学习笔记 Linux学习笔记Linux学习笔记Linux学习笔记',3,'2019-11-09 14:26:03','-3-',1,0),(6,'python笔记','5a979eb0','python笔记python笔记python笔记',100,1,'python笔记python笔记python笔记python笔记',2,'2019-11-10 14:25:51','-2-',1,0),(7,'社会科学','cac4f1f45','社会科学，自我励志，社',101,1,'社会科学，社会科学，社会科学',0,'2019-11-09 06:25:32','-',0,1),(8,'读后感','ce8c21844','学习技巧,学习方法，读书笔记',103,1,'综合各种读书的笔记，和自己的想法',7,'2019-11-09 06:27:57','-7-',1,0),(9,'网站运营','c1a35f84b','SEO思维，可落地的推广方案，日常的运营学习笔记',102,1,'技术是基础，运营是保障，不应该落下哪一部分，应该虚心受教，认真总结归纳并实践',0,'2019-11-09 06:38:05','-',0,1),(10,'SEO','c33b7f94e','系统SEO/SEM优化能力',101,1,'把学习过的SEO知识系统的总结归纳起来，本站建站初期可能SEO做的不好，后面认真总结实践',9,'2019-11-09 06:39:32','-9-',1,0),(11,'我的世界','cd0828c49','自我反省,自我提醒,把日常自我记录下来',103,1,'反过来告诫自己该做什么，不该做什么',7,'2019-11-10 03:47:37','-7-',1,0);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,12 +265,12 @@ DROP TABLE IF EXISTS `user_auth`;
 CREATE TABLE `user_auth` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) DEFAULT NULL,
-  `third_type` varchar(64) DEFAULT NULL,
-  `access_token` varchar(64) DEFAULT NULL,
+  `third_type` varchar(255) DEFAULT NULL,
+  `access_token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`),
   CONSTRAINT `user_auth_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user_info` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +279,7 @@ CREATE TABLE `user_auth` (
 
 LOCK TABLES `user_auth` WRITE;
 /*!40000 ALTER TABLE `user_auth` DISABLE KEYS */;
-INSERT INTO `user_auth` VALUES (1,1,'github','d95e5deddb576c0f10fe19292d09af9f697525ff');
+INSERT INTO `user_auth` VALUES (1,1,'github','668ccb1ecb389114360ee6d0c8c3c82bb6542293'),(4,5,'local','pbkdf2:sha256:150000$eIPsunbx$602772a824eae67373c942db5e93cec60304e5cfdc6cde49acbf49c1c4ee5f2b');
 /*!40000 ALTER TABLE `user_auth` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -306,7 +308,7 @@ CREATE TABLE `user_info` (
   `uuid` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uuid` (`uuid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -315,7 +317,7 @@ CREATE TABLE `user_info` (
 
 LOCK TABLES `user_info` WRITE;
 /*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-INSERT INTO `user_info` VALUES (1,NULL,NULL,NULL,NULL,'jinxiu89@163.com',NULL,'邱锦',NULL,NULL,NULL,'jinxiu89',NULL,'https://avatars0.githubusercontent.com/u/2970940?v=4','2970940');
+INSERT INTO `user_info` VALUES (1,NULL,NULL,NULL,NULL,'jinxiu89@163.com',NULL,'邱锦',NULL,NULL,NULL,'jinxiu89',NULL,'https://avatars0.githubusercontent.com/u/2970940?v=4','2970940'),(5,NULL,NULL,NULL,NULL,'jinxiu89@wavlink.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'81467243');
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -328,4 +330,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02 20:29:51
+-- Dump completed on 2019-12-08 21:27:41
