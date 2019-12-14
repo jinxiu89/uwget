@@ -50,4 +50,6 @@ def admin_permission_role_edit(id):
 @admin.route('/permission/role/setting/<int:id>', methods=['GET', 'POST'])
 def admin_set_permission(id):
     permission = Group.with_permission()
-    return 'hello'
+    print(permission)
+    return
+    return render_template('admin/permission/set_permission.html', permission=permission)

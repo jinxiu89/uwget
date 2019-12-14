@@ -6,6 +6,13 @@
   "description": "个人博客图标",
   "glyphs": [
     {
+      "icon_id": "129313",
+      "name": "tag",
+      "font_class": "tag",
+      "unicode": "e8eb",
+      "unicode_decimal": 59627
+    },
+    {
       "icon_id": "141405",
       "name": "185078 - email mail streamline",
       "font_class": "185078emailmailstreamline",
@@ -20,11 +27,25 @@
       "unicode_decimal": 58888
     },
     {
+      "icon_id": "517496",
+      "name": "user",
+      "font_class": "custom-user",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
       "icon_id": "849959",
       "name": "qq",
       "font_class": "qq-copy",
       "unicode": "e67f",
       "unicode_decimal": 59007
+    },
+    {
+      "icon_id": "1220297",
+      "name": "分类",
+      "font_class": "fenlei",
+      "unicode": "e605",
+      "unicode_decimal": 58885
     },
     {
       "icon_id": "1327499",
@@ -41,11 +62,11 @@
       "unicode_decimal": 59913
     },
     {
-      "icon_id": "6204095",
-      "name": "日历 日期",
-      "font_class": "riliriqi",
-      "unicode": "e60b",
-      "unicode_decimal": 58891
+      "icon_id": "4933172",
+      "name": "日历",
+      "font_class": "rili",
+      "unicode": "e72c",
+      "unicode_decimal": 59180
     },
     {
       "icon_id": "7239571",

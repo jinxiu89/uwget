@@ -8,7 +8,7 @@ body {
   background: #f5f5f5;
 }
 body .iconfont {
-  font-size: 18px;
+  font-size: 16px;
 }
 .icon-bar {
   background-color: #d9edf7;
@@ -95,7 +95,7 @@ body .iconfont {
 .banner .banner-info,
 .main .banner-info {
   background: #fff;
-  padding: 15px 0 15px 0;
+  padding: 0 0 15px 0;
 }
 .banner .banner-info .dl-horizontal dd,
 .main .banner-info .dl-horizontal dd {
@@ -114,7 +114,7 @@ body .iconfont {
 }
 .banner .main-item,
 .main .main-item {
-  padding: 0 15px;
+  padding: 5px 15px;
   margin-bottom: 20px;
   background: #fff;
 }
@@ -122,14 +122,25 @@ body .iconfont {
 .main .main-item .media-body h3 {
   margin-top: 15px;
 }
+.banner .main-item .btn,
+.main .main-item .btn {
+  padding: 0;
+}
+.banner .main-item h2,
+.main .main-item h2 {
+  font-size: 20px;
+}
 .banner .main-item .hot_article,
 .main .main-item .hot_article {
-  padding: 15px 0 15px 0;
+  padding: 0 0 15px 0;
+}
+.banner .main-item .hot_article ul,
+.main .main-item .hot_article ul {
+  padding-left: 15px;
 }
 .banner .main-item ul,
 .main .main-item ul {
-  font-size: 12px;
-  padding-left: 15px;
+  font-size: 13px;
 }
 .banner .main-item ul li,
 .main .main-item ul li {
