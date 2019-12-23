@@ -7,9 +7,11 @@ from flask import render_template, request, jsonify, session
 from app.modules.PermissionGroup import PermissionGroup as Model
 from utils.admin.common import packing_error
 from forms.permission.PermissionGroup import PermissionGroup
+from app.admin.decorate import is_login
 
 
 @admin.route('/permission/group/', methods=['GET'])
+@is_login
 def admin_permission_group():
     data, count = Model.all()
     if request.method == "GET":
@@ -17,6 +19,7 @@ def admin_permission_group():
 
 
 @admin.route('/permission/group/add', methods=['GET', 'POST'])
+@is_login
 def admin_permissionGroup_add():
     form = PermissionGroup()
     if request.method == "GET":
@@ -31,6 +34,7 @@ def admin_permissionGroup_add():
 
 
 @admin.route('/permission/group/edit/<int:id>', methods=['GET', 'POST'])
+@is_login
 def admin_permissionGroup_edit(id):
     form = PermissionGroup()
     data = Model.by_id(id)

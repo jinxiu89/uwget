@@ -4,11 +4,13 @@
 # create by thomas on 2019/5/28.
 from app.admin import admin
 from flask import render_template
-
+from app.admin.decorate import is_login
 @admin.route('/', methods=['GET'])
+@is_login
 def admin1_dashboard():
     return render_template("/admin/dashboard.html")
 
 @admin.route('/dashboard', methods=['GET'])
+@is_login
 def admin_dashboard():
     return render_template("/admin/dashboard.html")

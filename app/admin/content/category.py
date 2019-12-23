@@ -7,9 +7,11 @@ from flask import render_template, request, jsonify
 from forms.category.form import Form
 from app.modules.Category import Category
 from utils.admin.common import packing_error
+from app.admin.decorate import is_login
 
 
 @admin.route('/category', methods=['GET'])
+@is_login
 def admin_category_list():
     if request.method == 'GET':
         data, count = Category.all()
@@ -17,6 +19,7 @@ def admin_category_list():
 
 
 @admin.route('/category/add', methods=['GET', 'POST'])
+@is_login
 def admin_category_add():
     form = Form()
     form.pid.choices = Category.choices()
@@ -32,6 +35,7 @@ def admin_category_add():
 
 
 @admin.route('/category/edit/<int:id>', methods=['GET', 'POST'])
+@is_login
 def admin_category_edit(id):
     form = Form()
     form.pid.choices = Category.choices()
@@ -54,6 +58,7 @@ def admin_category_edit(id):
 
 
 @admin.route('/category/category_stop/<int:id>', methods=['GET'])
+@is_login
 def admin_category_stop(id):
     if request.method == "GET":
         category = Category.by_id(id)
@@ -63,6 +68,7 @@ def admin_category_stop(id):
 
 
 @admin.route('/category/category_start/<int:id>', methods=['GET'])
+@is_login
 def admin_category_start(id):
     if request.method == "GET":
         category = Category.by_id(id)

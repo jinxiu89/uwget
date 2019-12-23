@@ -1,0 +1,30 @@
+{% extends "admin/base/form.html" %}
+{% block form %}
+    <form action="" method="post" class="form form-horizontal" id="form-admin-add">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2">权限列表：</label>
+            <div class="form-controls col-xs-8 col-sm-10">
+                {% for items in group %}
+                    <dl class="Hui-admin-permission-list">
+                        <dt>
+                            <label>{{ items.name }}</label>
+                        </dt>
+                        <dd class="clearfix Hui-admin-permission-list2">
+                            {% for item in items.permission %}
+                                <label>
+                                    <input type="checkbox" value="{{ item.id }}" name="id"> {{ item.name }}
+                                </label>
+                            {% endfor %}
+                        </dd>
+                    </dl>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {{ form.csrf_token }}
+                {{ form.submit }}
+            </div>
+        </div>
+    </form>
+{% endblock %}

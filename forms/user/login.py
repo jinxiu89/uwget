@@ -47,7 +47,7 @@ class LoginForm(FlaskForm):
             if not check_password_hash(auth.access_token,self.password.data):
                 return {'status': False, 'message': '输入的密码不正确'}
             else:
-                data={'name':User.email,'uuid':'','access':auth.access_token}
+                data={'name':User.email,'uuid':User.uuid,'access':auth.access_token}
                 session['user']=json.dumps(data)
                 return {'status':True,'message':'登陆成功！'}
 

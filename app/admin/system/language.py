@@ -7,9 +7,11 @@ from flask import render_template, request, jsonify, session
 from forms.language.form import Form
 from app.modules.Language import Language
 from utils.admin.common import packing_error
+from app.admin.decorate import is_login
 
 
 @admin.route('/language', methods=['GET', 'POST'])
+@is_login
 def admin_language_list():
     if request.method == "GET":
         data, count = Language.all()
@@ -17,6 +19,7 @@ def admin_language_list():
 
 
 @admin.route('/language/add', methods=['GET', 'POST'])
+@is_login
 def admin_language_add():
     form = Form()
     if request.method == "GET":
@@ -31,6 +34,7 @@ def admin_language_add():
 
 
 @admin.route('/language/edit/<int:id>', methods=['GET', 'POST'])
+@is_login
 def admin_language_edit(id):
     form = Form()
     data = Language.by_id(id)
@@ -49,6 +53,7 @@ def admin_language_edit(id):
 
 
 @admin.route('/language/stop/<int:id>', methods=['GET', 'POST'])
+@is_login
 def admin_language_stop(id):
     if request.method == "GET":
         data = Language.by_id(id)
@@ -58,6 +63,7 @@ def admin_language_stop(id):
 
 
 @admin.route('/language/start/<int:id>', methods=['GET', 'POST'])
+@is_login
 def admin_language_start(id):
     if request.method == "GET":
         data = Language.by_id(id)
