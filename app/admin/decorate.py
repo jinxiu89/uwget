@@ -6,16 +6,11 @@ from functools import wraps
 from flask import session, redirect, url_for, request, flash
 
 
-def is_login(f):
-    """
-    强制登录装饰器，检查所有的连接是否在登录状态
-    :param f:
-    :return:
-    """
-    @wraps(f)
+def require_login(function):
+    @wraps(function)
     def req(*args, **kwargs):
-        if session.get("user") is None:
-            return redirect(url_for("user.login", next=request.url))
-        return f(*args, **kwargs)
+        if session.get('user') is None:
+            return redirect(url_for('user.login', next=request.url))
+        return function(*args, **kwargs)
 
     return req

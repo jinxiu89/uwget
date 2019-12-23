@@ -8,25 +8,25 @@ from app.modules.Permission import Permission
 from app.modules.PermissionGroup import PermissionGroup
 from utils.admin.common import packing_error
 from forms.permission.Permission import PermissionForm
-from app.admin.decorate import is_login
+from app.admin.decorate import require_login
 
 
 @admin.route('/permission', methods=['GET'])
-@is_login
+@require_login
 def admin_permission():
     data, count = Permission.all()
     return render_template('admin/permission/permission.html', data=data, count=count)
 
 
 @admin.route('/permission/group/<int:group_id>', methods=['GET', 'POST'])
-@is_login
+@require_login
 def admin_permission_list(group_id):
     data, count = Permission.by_groupId(group_id)
     return render_template('admin/permission/permission.html', data=data, count=count, group_id=group_id)
 
 
 @admin.route('/permission/<int:group_id>/add', methods=['GET', 'POST'])
-@is_login
+@require_login
 def admin_permission_add(group_id=None):
     form = PermissionForm()
     form.group_id.choices = PermissionGroup.choices()
@@ -44,7 +44,7 @@ def admin_permission_add(group_id=None):
 
 
 @admin.route('/permission/edit/<int:id>', methods=['GET', 'POST'])
-@is_login
+@require_login
 def admin_permission_edit(id):
     form = PermissionForm()
     form.group_id.choices = PermissionGroup.choices()

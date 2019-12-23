@@ -10,25 +10,25 @@ from app.modules.Category import Category
 from app.modules.Posts import Posts
 from utils.admin.common import packing_error
 from libs.classify import Classify
-from app.admin.decorate import is_login
+from app.admin.decorate import require_login
 
 
 @admin.route('/posts', methods=['GET'])
-@is_login
+@require_login
 def admin_posts_list():
     data, count = Posts.all()
     return render_template('admin/posts/index.html', data=data, count=count)
 
 
 @admin.route('/posts/category/<int:category_id>', methods=['GET'])
-@is_login
+@require_login
 def admin_post_category_list(category_id):
     data, count = Posts.by_category(category_id)
     return render_template('admin/posts/index.html', data=data, count=count)
 
 
 @admin.route('/post/add', methods=['GET', 'POST'])
-@is_login
+@require_login
 def admin_post_add():
     form = Form()
     form.category_id.choices = Category.choices()
@@ -44,7 +44,7 @@ def admin_post_add():
 
 
 @admin.route('/post/edit/<int:id>', methods=['GET', 'POST'])
-@is_login
+@require_login
 def admin_post_edit(id):
     form = Form()
     form.category_id.choices = Category.choices()
@@ -72,7 +72,7 @@ def admin_post_edit(id):
 
 
 @admin.route('/post/start/<int:id>', methods=['GET'])
-@is_login
+@require_login
 def admin_post_start(id):
     if request.method == 'GET':
         data = Posts.by_id(id)
@@ -84,7 +84,7 @@ def admin_post_start(id):
 
 
 @admin.route('/post/stop/<int:id>', methods=['GET'])
-@is_login
+@require_login
 def admin_post_stop(id):
     if request.method == "GET":
         data = Posts.by_id(id)
