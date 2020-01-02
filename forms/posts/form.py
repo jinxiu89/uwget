@@ -10,6 +10,7 @@ from wtforms import StringField, SubmitField, RadioField, TextAreaField, SelectF
 from wtforms.validators import DataRequired, length
 from app.modules.Base import db
 from app.modules.Posts import Posts
+from app.modules.Comments import Comments
 
 
 class Form(FlaskForm):
@@ -62,7 +63,7 @@ class Form(FlaskForm):
     def create(self):
         result = Posts(
             category_id=self.category_id.data,
-            title='p'+uuid.uuid4().hex[0:16:2],
+            title='p' + uuid.uuid4().hex[0:16:2],
             uuid=eval(session.get("user"))['uuid'],
             name=self.name.data,
             subtitle=self.subtitle.data,
@@ -103,6 +104,36 @@ class Form(FlaskForm):
             db.session.add(data)
             db.session.commit()
             return {'status': True, 'message': "保存成功"}
+        except Exception as e:
+            db.session.rollback()
+            return {'status': False, 'message': str(e)}
+
+
+class Comment(FlaskForm):
+    body = TextAreaField(
+        label='评论内容',
+        description="评论",
+        validators=[DataRequired("没有评论咋存呢？占空地？")],
+        render_kw={"id": "body",
+                   "class": "form-control",
+                   "placeholder": "评论内容",
+                   "rows": "10"})
+    post_id = IntegerField()
+    uid = IntegerField()
+    to_uid = IntegerField()
+
+    submit = SubmitField(
+        render_kw={"class": "btn btn-primary", 'id': 'button', 'type': "button", 'style': "padding:5px",
+                   "value": "       保      存     "})
+
+    def create(self):
+        comment = Comments(
+
+        )
+        try:
+            db.session.add(comment)
+            db.session.commit()
+            return {'status': True, 'message': '保存成功'}
         except Exception as e:
             db.session.rollback()
             return {'status': False, 'message': str(e)}
