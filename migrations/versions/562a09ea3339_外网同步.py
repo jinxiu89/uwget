@@ -1,8 +1,8 @@
-"""评论功能数据库
+"""外网同步
 
-Revision ID: a793a8c79171
-Revises: 2a07c67b5360
-Create Date: 2019-12-26 22:58:13.612068
+Revision ID: 562a09ea3339
+Revises: 
+Create Date: 2020-01-08 22:38:39.685263
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a793a8c79171'
-down_revision = '2a07c67b5360'
+revision = '562a09ea3339'
+down_revision = None
 branch_labels = None
 depends_on = None
 
