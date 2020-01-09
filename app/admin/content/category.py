@@ -4,9 +4,9 @@
 # create by thomas on 2019/8/11.
 from app.admin import admin
 from flask import render_template, request, jsonify
-from forms.category.form import Form
+from app.forms.category.form import Form
 from app.modules.Category import Category
-from utils.admin.common import packing_error
+from app.utils.admin.common import packing_error
 from app.admin.decorate import require_login
 
 

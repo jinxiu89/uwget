@@ -5,11 +5,11 @@
 import json
 from app.admin import admin
 from flask import render_template, request, jsonify, session
-from forms.posts.form import Form
+from app.forms.posts.form import Form
 from app.modules.Category import Category
 from app.modules.Posts import Posts
-from utils.admin.common import packing_error
-from libs.classify import Classify
+from app.utils.admin.common import packing_error
+from app.libs.classify import Classify
 from app.admin.decorate import require_login
 
 

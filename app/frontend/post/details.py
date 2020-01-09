@@ -5,7 +5,7 @@
 from app.frontend import frontend
 from flask import render_template, request
 from app.modules.Posts import Posts
-from forms.posts.form import Comment
+from app.forms.posts.form import Comment
 
 
 @frontend.route('/post/<string:title>.html', methods=['GET'])

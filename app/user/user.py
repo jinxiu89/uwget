@@ -4,10 +4,10 @@
 # create by thomas on 2019/6/23.
 from app.user import user
 from flask import render_template, request, redirect, url_for, jsonify, session, flash
-from forms.user.login import LoginForm
-from forms.user.reg import RegForm
-from libs.redis import set_redis_data
-from utils.admin.common import packing_error
+from app.forms.user.login import LoginForm
+from app.forms.user.reg import RegForm
+from app.libs.redis import set_redis_data
+from app.utils.admin.common import packing_error
 
 
 @user.route('/login', methods=['GET', 'POST'])

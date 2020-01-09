@@ -6,7 +6,7 @@ import json
 from .Base import db
 from .Posts import Posts  # 关系表，分文件存储表时，需要 import
 from flask import jsonify, url_for
-from utils.category import to_level
+from app.utils.category import to_level
 
 
 class Category(db.Model):

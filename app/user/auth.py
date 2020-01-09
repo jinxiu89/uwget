@@ -6,7 +6,7 @@ from flask import redirect, flash, url_for, session
 from flask_github import GitHub
 
 from app.user import user
-from utils.user.UserAuth import auth_github
+from app.utils.user.UserAuth import auth_github
 from app.admin.index.dashboard import admin_dashboard
 
 Github = GitHub()

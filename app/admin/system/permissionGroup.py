@@ -5,8 +5,8 @@
 from app.admin import admin
 from flask import render_template, request, jsonify, session
 from app.modules.PermissionGroup import PermissionGroup as Model
-from utils.admin.common import packing_error
-from forms.permission.PermissionGroup import PermissionGroup
+from app.utils.admin.common import packing_error
+from app.forms.permission.PermissionGroup import PermissionGroup
 from app.admin.decorate import require_login
 
 

@@ -4,9 +4,9 @@
 # create by thomas on 2019/8/24.
 from app.admin import admin
 from flask import render_template, request, jsonify, session
-from forms.language.form import Form
+from app.forms.language.form import Form
 from app.modules.Language import Language
-from utils.admin.common import packing_error
+from app.utils.admin.common import packing_error
 from app.admin.decorate import require_login
 
 

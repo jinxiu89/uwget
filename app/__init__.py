@@ -7,7 +7,7 @@ from flask_wtf.csrf import CSRFProtect, CSRFError
 from flask_moment import Moment
 from app.modules.Base import db
 from config import config
-from utils.admin.upload import upload_image
+from app.utils.admin.upload import upload_image
 from app.admin import admin
 from app.user import user
 from app.user.auth import Github
