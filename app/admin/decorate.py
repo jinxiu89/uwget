@@ -3,7 +3,7 @@
 # author:jinxiu89@163.com
 # create by thomas on 2019/8/31.
 from functools import wraps
-from flask import session, redirect, url_for, request, flash
+from flask import session, redirect, url_for, request
 
 
 def require_login(function):

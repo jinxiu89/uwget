@@ -75,7 +75,7 @@ body .iconfont {
 }
 .banner p,
 .main p {
-  color: #333333;
+  color: #666;
 }
 .banner .media-body li,
 .main .media-body li {
@@ -128,7 +128,7 @@ body .iconfont {
 }
 .banner .main-item h2,
 .main .main-item h2 {
-  font-size: 20px;
+  font-size: 18px;
 }
 .banner .main-item .hot_article,
 .main .main-item .hot_article {
@@ -140,7 +140,7 @@ body .iconfont {
 }
 .banner .main-item ul,
 .main .main-item ul {
-  font-size: 13px;
+  font-size: 12px;
 }
 .banner .main-item ul li,
 .main .main-item ul li {
